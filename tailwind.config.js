@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./public/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: {
+        navbar: "#1a1e21",
+      },
+    },
   },
   plugins: [
     function ({ addUtilities }) {

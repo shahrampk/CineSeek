@@ -7,10 +7,40 @@
     <title>CineSeek App</title>
     <!-- css link -->
     <link rel="stylesheet" href="../public/style.css">
+    <!-- favicon -->
+     <link rel="shortcut icon" href="../public/assets/logo.svg" type="image/x-icon">
 </head>
 
 <body class="bg-black text-white font-sans">
-
+    <!-- Navbar -->
+    <nav class="bg-navbar/80 p-4 flex justify-between items-center">
+        <!-- <h1 class="text-2xl font-bold">Movie Explorer</h1> -->
+        <svg width="180" height="60" viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background Circle -->
+            <circle cx="30" cy="30" r="30" fill="#1A1A1A" />
+            <!-- Magnifying Glass -->
+            <circle cx="30" cy="30" r="18" fill="none" stroke="#FFFFFF" stroke-width="2" />
+            <line x1="42" y1="42" x2="48" y2="48" stroke="#FFFFFF" stroke-width="2" />
+            <!-- Film Reel -->
+            <circle cx="30" cy="30" r="12" fill="#FFFFFF" />
+            <circle cx="30" cy="30" r="9" fill="#1A1A1A" />
+            <!-- Play Button -->
+            <polygon points="27,25 33,30 27,35" fill="#E50914" />
+            <!-- Text -->
+            <text x="70" y="40" text-anchor="start" font-family="Montserrat, Arial, sans-serif" font-size="20"
+                font-weight="bold">
+                <tspan fill="#E50914">CINE</tspan>
+                <tspan fill="#FFFFFF">SEEK</tspan>
+            </text>
+        </svg>
+        <div class="flex items-center space-x-4">
+            <input type="text" placeholder="Search movies..."
+                class="px-4 py-2.5 rounded-md bg-gray-700 text-white focus:outline-none drop-shadow-md focus-within:drop-shadow-xl transition-all duration-300 outline-none">
+            <button
+                class="bg-red-600 hover:bg-red-700 px-4 py-2.5 rounded-md drop-shadow-lg transition-all duration-300">Search</button>
+        </div>
+    </nav>
+    
 </body>
 
 </html>
