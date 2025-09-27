@@ -14,7 +14,6 @@
 <body class="bg-black text-white font-sans flex flex-col items-center 3xl:max-w-screen-3xl 3xl:mx-auto">
     <!-- Navbar -->
     <nav class="bg-navbar/80 p-4 w-full flex justify-between items-center">
-        <!-- <h1 class="text-2xl font-bold">Movie Explorer</h1> -->
         <svg width="180" height="60" viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
             <!-- Background Circle -->
             <circle cx="30" cy="30" r="30" fill="#1A1A1A" />
@@ -33,20 +32,22 @@
                 <tspan fill="#FFFFFF">SEEK</tspan>
             </text>
         </svg>
-        <form class="flex items-center gap-2">
-            <input type="text" placeholder="Search movies..."
-                class="px-4 py-2.5 rounded-md bg-search-bar text-white focus:outline-none drop-shadow-md focus-within:drop-shadow-xl transition-all duration-300 outline-none">
+        <div>
+            <form class="flex items-center gap-2">
+                <input type="text" placeholder="Search movies..."
+                    class="px-4 py-2.5 rounded-md bg-search-bar text-white focus:outline-none drop-shadow-md focus-within:drop-shadow-xl transition-all duration-300 outline-none">
 
-            <input type="button"
-                class="bg-red-600 hover:bg-red-700 px-4 py-2.5 rounded-md drop-shadow-lg transition-all duration-300 cursor-pointer"
-                value="Search">
-        </form>
+                <input type="button"
+                    class="bg-red-600 hover:bg-red-700 px-4 py-2.5 rounded-md drop-shadow-lg transition-all duration-300 cursor-pointer"
+                    value="Search">
+            </form>
+        </div>
     </nav>
     <!-- Main Content -->
-    <div class="flex gap-14 flex-col p-4 md:p-8">
+    <div class="flex gap-24 flex-col p-4 md:p-8">
 
         <!-- Trending Movies Section -->
-        <section class="mb-8 ">
+        <section>
             <h2 class="text-lg sm:text-2xl font-bold mb-4 md:mb-6">Trending Movies</h2>
             <div class="relative max-w-slider mx-auto">
                 <!-- Left Button -->
@@ -229,11 +230,12 @@
             </div>
         </section>
         <!-- Feature Section -->
-        <section id="feature_section"> 
+        <section id="feature_section">
             <div class="flex flex-col gap-1">
-
-                <h2 class="text-lg sm:text-2xl font-bold mb-4 md:mb-6">
-                    Provided Feature</h2>
+                <div class="feature_section_heading-box">
+                    <h2 class="text-lg sm:text-2xl font-bold mb-4 md:mb-6">
+                        Provided Feature</h2>
+                </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4">
                     <div class="bg-linear-gradient cursor-default rounded-lg py-6 px-4 flex flex-col gap-4">
                         <h2 class="font-bold text-xl opacity-85">🔍 Search Movies</h2>
@@ -261,6 +263,173 @@
                             tap, creating a personalized collection of
                             films you’re excited to watch. Access your list anytime, anywhere, and never miss out on
                             your next movie obsession.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- FSQ Section -->
+        <section id="FSQ__section">
+            <div class="flex flex-col gap-1">
+                <div class="FSQ__section_heading-box">
+                    <h2 class="text-lg sm:text-2xl font-bold mb-4 md:mb-6">
+                        Frequently Asked Questions</h2>
+                </div>
+                <div class="FSQ__section_FSQ-box">
+                    <div class="flex flex-col gap-4">
+                        <div class="flex flex-col gap-1">
+                            <div
+                                class="FSQs FSQs-1 bg-navbar p-4 md:p-6 rounded-md hover:bg-search-bar/65 cursor-pointer transition-all duration-200 flex justify-between items-center gap-3">
+                                <h2 class="text-lg md:text-2xl font-semibold opacity-95">What is CineSeek?</h2>
+                                <div class="h-8 w-8">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor" height="30">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="bg-navbar p-6 rounded-md hidden">
+                                <p class="flex flex-col gap-6 text-base md:text-xl">
+                                    <span>
+
+                                        CineSeek is your ultimate movie companion! Discover, explore, and organize films
+                                        with
+                                        ease using features like <span class="font-bold">Search Movies</span> to find
+                                        any film in seconds.
+                                    </span>
+                                    <span>
+
+                                        <span class="font-bold">Trending Movies</span> to stay updated on what’s hot,
+                                        <span class="font-bold">Watch on YouTube</span> to stream trailers or movies
+                                        instantly.
+                                    </span>
+                                    <span>
+
+                                        Watchlist to save your must-watch picks. Whether you’re a
+                                        casual viewer or a cinephile,
+                                    </span>
+                                    CineSeek makes finding and enjoying movies simple and fun!
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <div
+                                class="FSQs FSQs-2 bg-navbar p-4 md:p-6 rounded-md hover:bg-search-bar/65 cursor-pointer transition-all duration-200 flex justify-between items-center gap-3">
+                                <h2 class="text-lg md:text-2xl font-semibold opacity-95">How do I search for movies on
+                                    the app?
+                                </h2>
+                                <div class="h-8 w-8">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                        height="30">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                </div>
+
+                            </div>
+                            <div class="bg-navbar p-6 rounded-md hidden">
+                                <p class="flex flex-col gap-6 text-base md:text-xl ">
+                                    Finding your favorite movie is easy! Use the Search Movies feature by typing a
+                                    title, genre, actor, or director in the
+                                    search bar. You’ll instantly see results with movie details, ratings, and more. Try
+                                    keywords like “action” or “Tom
+                                    Hanks” to explore!
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <div
+                                class="FSQs FSQs-3 bg-navbar p-4 md:p-6 rounded-md hover:bg-search-bar/65 cursor-pointer transition-all duration-200 flex justify-between items-center gap-3">
+                                <h2 class="text-lg md:text-2xl font-semibold opacity-95">What are Trending Movies, and
+                                    how are they
+                                    selected?</h2>
+                                <div class="h-8 w-8">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                        height="30">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                </div>
+
+                            </div>
+                            <div class="bg-navbar p-6 rounded-md hidden">
+                                <p class="flex flex-col gap-6 text-base md:text-xl">
+                                    The Trending Movies section showcases the most popular films right now, based on
+                                    what’s buzzing in the movie world.
+                                    These are updated regularly to reflect current viewer favorites, box office hits, or
+                                    viral sensations, so you’re always
+                                    in the loop.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <div
+                                class="FSQs FSQs-4 bg-navbar p-4 md:p-6 rounded-md hover:bg-search-bar/65 cursor-pointer transition-all duration-200 flex justify-between items-center gap-3">
+                                <h2 class="text-lg md:text-2xl font-semibold opacity-95">Can I watch full movies
+                                    directly on the
+                                    app?</h2>
+                                <div class="h-8 w-8">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                        height="30">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                </div>
+
+                            </div>
+                            <div class="bg-navbar p-6 rounded-md hidden">
+                                <p class="flex flex-col gap-6 text-base md:text-xl">
+                                    With the Watch on YouTube feature, you can stream trailers, behind-the-scenes clips,
+                                    or full movies available on YouTube
+                                    with just one click. If a movie isn’t available on YouTube, we’ll provide links to
+                                    where you can watch it on other
+                                    platforms, if applicable.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <div
+                                class="FSQs FSQs-5 bg-navbar p-4 md:p-6 rounded-md hover:bg-search-bar/65 cursor-pointer transition-all duration-200 flex justify-between items-center gap-3">
+                                <h2 class="text-lg md:text-2xl font-semibold opacity-95">How does the Watchlist work?
+                                </h2>
+                                <div class="h-8 w-8">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                        height="30">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                </div>
+
+                            </div>
+                            <div class="bg-navbar p-6 rounded-md hidden">
+                                <p class="flex flex-col gap-6 text-base md:text-xl">
+                                    The Watchlist lets you save movies you want to watch later. Just tap the heart icon
+                                    next to any movie to add it to your
+                                    list. You can access your Watchlist anytime from your profile to plan your next
+                                    movie night!
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <div
+                                class="FSQs FSQs-6 bg-navbar p-4 md:p-6 rounded-md hover:bg-search-bar/65 cursor-pointer transition-all duration-200 flex justify-between items-center gap-3">
+                                <h2 class="text-lg md:text-2xl font-semibold opacity-95">How do I know if a movie is
+                                    available in
+                                    my region?</h2>
+                                <div class="h-8 w-8">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                        height="30">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="bg-navbar p-6 rounded-md hidden">
+                                <p class="flex flex-col gap-6 text-base md:text-xl">
+                                    Availability depends on the platform hosting the movie (e.g., YouTube). When you use
+                                    the Watch on YouTube feature,
+                                    you’ll be redirected to YouTube, where region-specific availability will be shown.
+                                    We’re working to provide more
+                                    region-based guidance in the future.
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
