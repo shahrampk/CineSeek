@@ -1,21 +1,24 @@
 // Controller.js
+import * as model from "./model.js";
 import FAQsView from "./Views/FAQs-view.js";
-// import * as model from "./model.js"; // Uncomment when model is implemented
+import ceroucelView from "./Views/ceroucel-view.js";
 
 console.log("Controller.js loaded");
 
-/**
- * Handles FAQ toggle logic
- */
-const controlFAQs = function () {
-  FAQsView.switchAccordion();
+const controllTrendingMovies = async function () {
+  try {
+    await model.fetchTrendingMovies();
+    console.log(model.state.trendingMovies);
+    ceroucelView.render(model.state.trendingMovies);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-/**
- * Initializes the application
- */
+// Initializes the application
 const init = function () {
-  controlFAQs();
+  FAQsView.switchAccordion();
+  controllTrendingMovies();
 };
 
 init();

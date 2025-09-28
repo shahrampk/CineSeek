@@ -1,0 +1,23 @@
+flowchart TD
+
+A[User Opens Cineseek] --> B[Controller: initApp()]
+B --> C[Model: Fetch Trending Movies (TMDB API)]
+C --> D[Controller Receives Data]
+D --> E[View: Render Trending Movies]
+
+%% Search Flow
+A2[User Types Movie in Search + Clicks Button] --> F[Controller: searchMovies()]
+F --> G[Model: Fetch from TMDB API (/search)]
+G --> H[Controller Receives Data]
+H --> I[View: Render Search Results]
+
+%% Trailer Flow
+A3[User Clicks "Watch on YouTube" Button] --> J[Controller: Get Movie ID]
+J --> K[Model: Fetch Movie Videos (/movie/{id}/videos)]
+K --> L[Controller Extracts YouTube Key]
+L --> M[Open YouTube Link in New Tab]
+
+%% Error Handling
+C -->|Error| X[View: Show Error Message]
+G -->|Error| X
+K -->|Error| X

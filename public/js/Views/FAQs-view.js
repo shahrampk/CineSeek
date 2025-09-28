@@ -7,11 +7,7 @@ console.log("FAQs-view.js loaded");
 class ViewFAQs {
   #parentEl = document.querySelector(".FSQ-box");
 
-  /**
-   * Initializes the FAQ accordion event listener
-   * @param {Function} handler - Callback function to execute when an accordion is toggled
-   */
-  switchAccordion(handler) {
+  switchAccordion() {
     if (!this.#parentEl) return;
 
     this.#parentEl.addEventListener("click", (e) => {
@@ -19,30 +15,30 @@ class ViewFAQs {
       if (!target) return;
 
       const ansEl = target.parentNode.querySelector(".FAQs-ans");
+      const icon = target.querySelector("div");
       if (!ansEl) return;
 
       const isAlreadyOpen = !ansEl.classList.contains("hidden");
 
       // Close all before opening a new one
-      this.hideOtherOpenedEl();
+      this._hideOtherOpenedEl(icon);
 
       // Toggle current one (only open if it was not already open)
       if (!isAlreadyOpen) {
         ansEl.classList.remove("hidden");
+        icon.classList.add("rotate-40");
       }
-      handler();
     });
   }
 
-  /**
-   * Hides all open FAQ answers
-   */
-  hideOtherOpenedEl() {
+  // Hides all open FAQ answers
+  _hideOtherOpenedEl(icon) {
     if (!this.#parentEl) return;
-
     const ansArr = this.#parentEl.querySelectorAll(".FAQs-ans");
     ansArr.forEach((ans) => ans.classList.add("hidden"));
+    icon.classList.remove("rotate-40");
   }
+  rotateIcon() {}
 }
 
 export default new ViewFAQs();

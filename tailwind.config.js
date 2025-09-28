@@ -17,6 +17,9 @@ module.exports = {
         "linear-gradient":
           "linear-gradient(to right bottom, #15181a 40%, #1d2021)",
       },
+      rotate: {
+        40: "40deg", // 👈 custom rotate utility
+      },
     },
   },
   plugins: [
