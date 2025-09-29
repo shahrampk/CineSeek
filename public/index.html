@@ -50,185 +50,95 @@
         <!-- Trending Movies Section -->
         <section id="trending__movies">
             <h2 class="text-lg sm:text-2xl font-bold mb-4 md:mb-6">Trending Movies</h2>
-            <div class="relative max-w-slider mx-auto min-h-96">
+
+            <div class="relative w-full h-fit overflow-y-hidden">
                 <!-- Left Button -->
                 <button id="prev"
                     class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full z-10">
                     &#10094;
                 </button>
-
+            
                 <!-- Slider Wrapper -->
-                <div id="carousel"
-                    class="flex overflow-x-scroll scroll-smooth scrollbar-hide no-scrollbar space-x-4 p-4 ">
-                    <!--
-                    Card
-                    <div class="carousel-item min-w-[80%] sm:min-w-[45%] md:min-w-[30%] lg:min-w-[22%]">
-                        <div class="bg-gray-800/80 rounded-xl overflow-hidden group drop-shadow-lg">
-                            <div class="relative">
-                                <div
-                                    class="absolute top-0 left-0 h-full w-full bg-black/20 group-hover:bg-black/35 transition-all duration-300">
-                                </div>
-                                <img src="https://i.ytimg.com/vi/ytYmDt0Chx8/hq720.jpg"
-                                    class="w-full h-56 sm:h-64 object-cover">
-                            </div>
-                            <div class="p-4">
-                                <h3 class="text-lg font-bold">Movie Title</h3>
-                                <p class="text-sm text-gray-400">2023 | ⭐ 8.5/10</p>
-                                <p class="text-sm mt-2 truncate">A thrilling adventure...</p>
-                                <div class="mt-4 flex space-x-2">
-                                    <button
-                                        class="bg-red-600 hover:bg-red-700 p-2 rounded text-sm transition-all duration-300">
-                                        Watch on YouTube
-                                    </button>
-                                    <button
-                                        class="bg-gray-600 hover:bg-gray-500 p-2 rounded text-sm transition-all duration-300">
-                                        + Watchlist
-                                    </button>
-                                </div>
-                            </div>
+                <div id="carousel" class="flex overflow-x-scroll scroll-smooth scrollbar-hide no-scrollbar gap-8 p-5 bg-green-600">
+            
+                    <!-- Poster Card -->
+                     <!-- 
+                    <div class="carousel-item flex-shrink-0 w-64 h-96  overflow-y-hidden bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w300/k5s01F32qot8beKgxRjdL9DDZ2m.jpg')] 
+                              bg-cover bg-no-repeat bg-center">
+                              <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">1</p>
                     </div>
-
-                    More Cards
-                    <div class="carousel-item min-w-[80%] sm:min-w-[45%] md:min-w-[30%] lg:min-w-[22%]">
-                        <div class="bg-gray-800/80 rounded-xl overflow-hidden group drop-shadow-lg">
-                            <div class="relative">
-                                <div
-                                    class="absolute top-0 left-0 h-full w-full bg-black/20 group-hover:bg-black/35 transition-all duration-300">
-                                </div>
-                                <img src="https://i.ytimg.com/vi/Q9mJkOR7eCc/hq720.jpg"
-                                    class="w-full h-56 sm:h-64 object-cover">
-                            </div>
-                            <div class="p-4">
-                                <h3 class="text-lg font-bold">Movie Title</h3>
-                                <p class="text-sm text-gray-400">2023 | ⭐ 8.5/10</p>
-                                <p class="text-sm mt-2 truncate">A thrilling adventure...</p>
-                                <div class="mt-4 flex space-x-2">
-                                    <button
-                                        class="bg-red-600 hover:bg-red-700 p-2 rounded text-sm transition-all duration-300">
-                                        Watch on YouTube
-                                    </button>
-                                    <button
-                                        class="bg-gray-600 hover:bg-gray-500 p-2 rounded text-sm transition-all duration-300">
-                                        + Watchlist
-                                    </button>
-                                </div>
-                            </div>
+                     -->
+                    <!-- More Posters -->
+                     <!-- 
+                    <div
+                        class="carousel-item flex-shrink-0 w-64 h-96  overflow-y-hidden drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="w-full h-full rounded-xl bg-cover bg-no-repeat bg-center" style="background-image: url('https://image.tmdb.org/t/p/w300/k5s01F32qot8beKgxRjdL9DDZ2m.jpg')">
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">1</p>
                     </div>
-                    <div class="carousel-item min-w-[80%] sm:min-w-[45%] md:min-w-[30%] lg:min-w-[22%]">
-                        <div class="bg-gray-800/80 rounded-xl overflow-hidden group drop-shadow-lg">
-                            <div class="relative">
-                                <div
-                                    class="absolute top-0 left-0 h-full w-full bg-black/20 group-hover:bg-black/35 transition-all duration-300">
-                                </div>
-                                <img src="https://i.ytimg.com/vi/vOlakWZDUiM/hq720.jpg"
-                                    class="w-full h-56 sm:h-64 object-cover">
-                            </div>
-                            <div class="p-4">
-                                <h3 class="text-lg font-bold">Movie Title</h3>
-                                <p class="text-sm text-gray-400">2023 | ⭐ 8.5/10</p>
-                                <p class="text-sm mt-2 truncate">A thrilling adventure...</p>
-                                <div class="mt-4 flex space-x-2">
-                                    <button
-                                        class="bg-red-600 hover:bg-red-700 p-2 rounded text-sm transition-all duration-300">
-                                        Watch on YouTube
-                                    </button>
-                                    <button
-                                        class="bg-gray-600 hover:bg-gray-500 p-2 rounded text-sm transition-all duration-300">
-                                        + Watchlist
-                                    </button>
-                                </div>
-                            </div>
+                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//cm8TNGBGG0aBfWj0LgrESHv8tir.jpg')] 
+                              bg-cover bg-no-repeat bg-center">
+                              <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">3</p>
                     </div>
-                    <div class="carousel-item min-w-[80%] sm:min-w-[45%] md:min-w-[30%] lg:min-w-[22%]">
-                        <div class="bg-gray-800/80 rounded-xl overflow-hidden group drop-shadow-lg">
-                            <div class="relative">
-                                <div
-                                    class="absolute top-0 left-0 h-full w-full bg-black/20 group-hover:bg-black/35 transition-all duration-300">
-                                </div>
-                                <img src="https://i.ytimg.com/vi/x2SeyqGjySs/hq720.jpg"
-                                    class="w-full h-56 sm:h-64 object-cover">
-                            </div>
-                            <div class="p-4">
-                                <h3 class="text-lg font-bold">Movie Title</h3>
-                                <p class="text-sm text-gray-400">2023 | ⭐ 8.5/10</p>
-                                <p class="text-sm mt-2 truncate">A thrilling adventure...</p>
-                                <div class="mt-4 flex space-x-2">
-                                    <button
-                                        class="bg-red-600 hover:bg-red-700 p-2 rounded text-sm transition-all duration-300">
-                                        Watch on YouTube
-                                    </button>
-                                    <button
-                                        class="bg-gray-600 hover:bg-gray-500 p-2 rounded text-sm transition-all duration-300">
-                                        + Watchlist
-                                    </button>
-                                </div>
-                            </div>
+                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//gEU2QniE6E77NI6lCU6MxlNBvIx.jpg')] 
+                              bg-cover bg-no-repeat bg-center">
+                              <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">4</p>
                     </div>
-                    <div class="carousel-item min-w-[80%] sm:min-w-[45%] md:min-w-[30%] lg:min-w-[22%]">
-                        <div class="bg-gray-800/80 rounded-xl overflow-hidden group drop-shadow-lg">
-                            <div class="relative">
-                                <div
-                                    class="absolute top-0 left-0 h-full w-full bg-black/20 group-hover:bg-black/35 transition-all duration-300">
-                                </div>
-                                <img src="https://i.ytimg.com/vi/inBHIRshaVM/hqdefault.jpg?sqp=-oaymwEnCOADEI4CSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLB_C8C9bRPhOcF5-Kb7TxAKzxtL3Q"
-                                    class="w-full h-56 sm:h-64 object-cover">
-                            </div>
-                            <div class="p-4">
-                                <h3 class="text-lg font-bold">Movie Title</h3>
-                                <p class="text-sm text-gray-400">2023 | ⭐ 8.5/10</p>
-                                <p class="text-sm mt-2 truncate">A thrilling adventure...</p>
-                                <div class="mt-4 flex space-x-2">
-                                    <button
-                                        class="bg-red-600 hover:bg-red-700 p-2 rounded text-sm transition-all duration-300">
-                                        Watch on YouTube
-                                    </button>
-                                    <button
-                                        class="bg-gray-600 hover:bg-gray-500 p-2 rounded text-sm transition-all duration-300">
-                                        + Watchlist
-                                    </button>
-                                </div>
-                            </div>
+                    
+                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//cm8TNGBGG0aBfWj0LgrESHv8tir.jpg')] 
+                              bg-cover bg-no-repeat bg-center">
+                              <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">5</p>
                     </div>
-                    <div class="carousel-item min-w-[80%] sm:min-w-[45%] md:min-w-[30%] lg:min-w-[22%]">
-                        <div class="bg-gray-800/80 rounded-xl overflow-hidden group drop-shadow-lg">
-                            <div class="relative">
-                                <div
-                                    class="absolute top-0 left-0 h-full w-full bg-black/20 group-hover:bg-black/35 transition-all duration-300">
-                                </div>
-                                <img src="https://i.ytimg.com/vi/b5qM1BQVfpE/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCfSIJMD7thM3agavtHYcNc9vhSIg"
-                                    class="w-full h-56 sm:h-64 object-cover">
-                            </div>
-                            <div class="p-4">
-                                <h3 class="text-lg font-bold">Movie Title</h3>
-                                <p class="text-sm text-gray-400">2023 | ⭐ 8.5/10</p>
-                                <p class="text-sm mt-2 truncate">A thrilling adventure...</p>
-                                <div class="mt-4 flex space-x-2">
-                                    <button
-                                        class="bg-red-600 hover:bg-red-700 p-2 rounded text-sm transition-all duration-300">
-                                        Watch on YouTube
-                                    </button>
-                                    <button
-                                        class="bg-gray-600 hover:bg-gray-500 p-2 rounded text-sm transition-all duration-300">
-                                        + Watchlist
-                                    </button>
-                                </div>
-                            </div>
+                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//gEU2QniE6E77NI6lCU6MxlNBvIx.jpg')] 
+                              bg-cover bg-no-repeat bg-center">
+                              <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">6</p>
                     </div>
-  -->
+                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//qJ2tW6WMUDux911r6m7haRef0WH.jpg')] 
+                              bg-cover bg-no-repeat bg-center">
+                              <div class="overlay h-full w-full bg-black/50"></div>
+                        </div>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">7</p>
+                    </div>
+                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//cm8TNGBGG0aBfWj0LgrESHv8tir.jpg')] 
+                              bg-cover bg-no-repeat bg-center">
+                              <div class="overlay h-full w-full bg-black/50"></div>
+                        </div>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">8</p>
+                    </div>
+                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//gEU2QniE6E77NI6lCU6MxlNBvIx.jpg')] 
+                              bg-cover bg-no-repeat bg-center">
+                              <div class="overlay h-full w-full bg-black/50"></div>
+                        </div>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">9</p>
+                    </div> -->
                 </div>
-
+            
                 <!-- Right Button -->
                 <button id="next"
                     class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full z-10">
                     &#10095;
                 </button>
             </div>
+
         </section>
         <!-- Feature Section -->
         <section id="feature__section">
@@ -504,11 +414,11 @@
         }
 
         next.addEventListener("click", () => {
-            carousel.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
+            carousel.scrollBy({ left: carousel.offsetWidth, behavior: "smooth" });
         });
 
         prev.addEventListener("click", () => {
-            carousel.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
+            carousel.scrollBy({ left: -carousel.offsetWidth, behavior: "smooth" });
         });
     </script>
 </body>

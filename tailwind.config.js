@@ -6,8 +6,8 @@ module.exports = {
       screens: {
         "3xl": "1920px",
       },
-      maxWidth: {
-        slider: "1420px",
+      height: {
+        slider: "80vh",
       },
       backgroundColor: {
         navbar: "#1a1e21",
@@ -19,6 +19,16 @@ module.exports = {
       },
       rotate: {
         40: "40deg", // 👈 custom rotate utility
+      },
+      textShadow: {
+        outline: ` 2px 2px 0 #ced4da,
+             -2px -2px 0 #ced4da,
+              2px -2px 0 #ced4da,
+             -2px  2px 0 #ced4da,
+              3px  0   0 #ced4da,
+             -3px  0   0 #ced4da,
+              0   3px  0 #ced4da,
+              0  -3px  0 #ced4da`,
       },
     },
   },
@@ -33,6 +43,15 @@ module.exports = {
           display: "none",
         },
       });
+    },
+    function ({ addUtilities, theme }) {
+      const textShadow = theme("textShadow");
+      const utilities = Object.entries(textShadow).map(([key, value]) => {
+        return {
+          [`.text-shadow-${key}`]: { textShadow: value },
+        };
+      });
+      addUtilities(utilities, ["responsive"]);
     },
   ],
 };

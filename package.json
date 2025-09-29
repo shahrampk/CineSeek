@@ -2,9 +2,9 @@
   "name": "movies-finder",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "dev": "tailwindcss -i ./src/input.css -o ./public/style.css --watch"
+    "dev": "tailwindcss -i ./src/input.css -o ./public/style.css --watch",
+    "start": "parcel public/index.html"
   },
   "keywords": [],
   "author": "",
