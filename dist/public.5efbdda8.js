@@ -721,20 +721,23 @@ var _faqsViewJs = require("./Views/FAQs-view.js");
 var _faqsViewJsDefault = parcelHelpers.interopDefault(_faqsViewJs);
 var _ceroucelViewJs = require("./Views/ceroucel-view.js");
 var _ceroucelViewJsDefault = parcelHelpers.interopDefault(_ceroucelViewJs);
-console.log("Controller.js loaded");
 const controllTrendingMovies = async function() {
     try {
         await _modelJs.fetchTrendingMovies();
-        console.log(_modelJs.state.trendingMovies);
+        // console.log(model.state.trendingMovies);
         (0, _ceroucelViewJsDefault.default).render(_modelJs.state.trendingMovies);
     } catch (err) {
         console.error(err);
     }
 };
+const controlMoveSlider = function(direction) {
+    (0, _ceroucelViewJsDefault.default).controllmovenent(direction);
+};
 // Initializes the application
 const init = function() {
     (0, _faqsViewJsDefault.default).switchAccordion();
     controllTrendingMovies();
+    (0, _ceroucelViewJsDefault.default).moveSlider(controlMoveSlider);
 };
 init();
 
@@ -745,7 +748,6 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "fetchTrendingMovies", ()=>fetchTrendingMovies);
 var _configJs = require("./config.js");
-console.log("Model.js");
 const state = {
     trendingMovies: []
 };
@@ -836,18 +838,19 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _configJs = require("../config.js");
 class CerouselView {
-    #parentEl = document.querySelector("#carousel");
+    #carousel = document.querySelector("#carousel");
+    #parentEL = document.querySelector("#carousel-box");
+    #nextBtn = document.getElementById("next");
+    #next = document.getElementById("next");
     #data;
     render(data) {
-        console.log(this.#parentEl);
         this.#data = data;
         const markUp = this._generateMarkUp();
         this._clear();
-        console.log(this._clear);
-        this.#parentEl.insertAdjacentHTML("afterbegin", markUp);
+        this.#carousel.insertAdjacentHTML("afterbegin", markUp);
     }
     _clear() {
-        this.#parentEl.innerHTML = "";
+        this.#carousel.innerHTML = "";
     }
     _generateMarkUp() {
         return this.#data.map(this._generateMarkupCerousel).join("");
@@ -855,15 +858,40 @@ class CerouselView {
     _generateMarkupCerousel(movie, i) {
         if (i < 10) return `
             <div 
-              class="carousel-item flex-shrink-0 w-64 h-96  overflow-y-hidden drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+              class="carousel-item flex-shrink-0 w-64 h-96 relative hover:scale-105 transition-all duration-300 cursor-pointer">
                 <div 
                   class="w-full h-full rounded-xl bg-cover bg-no-repeat bg-center"
                   style="background-image: url('https://image.tmdb.org/t/p/w500/${movie.poster_path}')">
-                  <div class="overlay h-full w-full bg-black/50"></div>
+                  <div class="overlay h-full w-full rounded-xl bg-black/40"></div>
                 </div>
-                 <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">${i + 1}</p>
+                 <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-5">${i + 1}</p>
             </div>
     `;
+    }
+    controllmovenent(direction) {
+        const movieCard = this.#carousel.querySelector(".carousel-item");
+        if (direction === "next") // console.log("➡ Next button clicked!");
+        carousel.scrollBy({
+            left: movieCard.offsetWidth + 32,
+            behavior: "smooth"
+        });
+        if (direction === "prev") // console.log("⬅ Prev button clicked!");
+        carousel.scrollBy({
+            left: -movieCard.offsetWidth + 32,
+            behavior: "smooth"
+        });
+    }
+    moveSlider(handler) {
+        console.log(this.#parentEL);
+        this.#parentEL.addEventListener("click", (e)=>{
+            console.log(this.#parentEL);
+            const btn = e.target.closest(".carousel-btn");
+            if (!btn) return;
+            console.log(btn);
+            // Check button type
+            if (btn.id === "next") handler("next");
+            if (btn.id === "prev") handler("prev");
+        });
     }
 }
 exports.default = new CerouselView();

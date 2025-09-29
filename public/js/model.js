@@ -1,7 +1,6 @@
 // Model.js file
 import { API_KEY } from "./config.js";
 import { BASE_URL } from "./config.js";
-console.log("Model.js");
 export const state = {
   trendingMovies: [],
 };

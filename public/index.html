@@ -51,15 +51,15 @@
         <section id="trending__movies">
             <h2 class="text-lg sm:text-2xl font-bold mb-4 md:mb-6">Trending Movies</h2>
 
-            <div class="relative w-full h-fit overflow-y-hidden">
+            <div id="carousel-box" class="relative w-full overflow-y-hidden">
                 <!-- Left Button -->
                 <button id="prev"
-                    class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full z-10">
+                    class="carousel-btn absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full z-10">
                     &#10094;
                 </button>
             
                 <!-- Slider Wrapper -->
-                <div id="carousel" class="flex overflow-x-scroll scroll-smooth scrollbar-hide no-scrollbar gap-8 p-5 bg-green-600">
+                <div id="carousel" class="flex overflow-x-scroll scroll-smooth scrollbar-hide no-scrollbar gap-8 p-7 ">
             
                     <!-- Poster Card -->
                      <!-- 
@@ -134,7 +134,7 @@
             
                 <!-- Right Button -->
                 <button id="next"
-                    class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full z-10">
+                    class="carousel-btn absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full z-10">
                     &#10095;
                 </button>
             </div>
@@ -399,28 +399,6 @@
             </nav>
         </div>
     </footer>
-    <!-- JS -->
-    <script>
-        const carousel = document.getElementById("carousel");
-        const next = document.getElementById("next");
-        const prev = document.getElementById("prev");
-
-        function getScrollAmount() {
-            // Scroll depends on screen size (1 card width)
-            if (window.innerWidth < 640) return carousel.offsetWidth * 0.8;   // mobile
-            if (window.innerWidth < 768) return carousel.offsetWidth * 0.45;  // tablet
-            if (window.innerWidth < 1024) return carousel.offsetWidth * 0.3;  // small laptop
-            return carousel.offsetWidth * 0.22;                               // desktop
-        }
-
-        next.addEventListener("click", () => {
-            carousel.scrollBy({ left: carousel.offsetWidth, behavior: "smooth" });
-        });
-
-        prev.addEventListener("click", () => {
-            carousel.scrollBy({ left: -carousel.offsetWidth, behavior: "smooth" });
-        });
-    </script>
 </body>
 
 </html>
