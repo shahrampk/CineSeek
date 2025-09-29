@@ -853,10 +853,9 @@ class CerouselView {
         this.#carousel.innerHTML = "";
     }
     _generateMarkUp() {
-        return this.#data.map(this._generateMarkupCerousel).join("");
-    }
-    _generateMarkupCerousel(movie, i) {
-        if (i < 10) return `
+        // return this.#data.map(this._generateMarkupCerousel).join("");
+        return this.#data.map((movie, i)=>{
+            if (i < 10) return `
             <div 
               class="carousel-item flex-shrink-0 w-64 h-96 relative hover:scale-105 transition-all duration-300 cursor-pointer">
                 <div 
@@ -867,6 +866,7 @@ class CerouselView {
                  <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-5">${i + 1}</p>
             </div>
     `;
+        }).join("");
     }
     controllmovenent(direction) {
         const movieCard = this.#carousel.querySelector(".carousel-item");
@@ -877,7 +877,7 @@ class CerouselView {
         });
         if (direction === "prev") // console.log("⬅ Prev button clicked!");
         carousel.scrollBy({
-            left: -movieCard.offsetWidth + 32,
+            left: -movieCard.offsetWidth - 32,
             behavior: "smooth"
         });
     }
