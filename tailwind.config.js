@@ -8,14 +8,23 @@ module.exports = {
       },
       height: {
         slider: "80vh",
+        "details-box": "600px",
+      },
+      width: {
+        "details-box": "50vw",
       },
       backgroundColor: {
         navbar: "#1a1e21",
         "search-bar": "#343a40",
+        secondary: "",
       },
       backgroundImage: {
-        "linear-gradient":
-          "linear-gradient(to right bottom, #15181a 40%, #1d2021)",
+        "linear-gradient": "linear-gradient(35deg, #212529 35%, transparent)",
+        "movie-card-gradient":
+          "linear-gradient(25deg, #030404 22%, rgba(0,0,0,0.52),transparent)",
+      },
+      boxShadow: {
+        "movie-card-gradient": "0px 0px 40px 15px rgb(0,0,0)",
       },
       rotate: {
         40: "40deg", // 👈 custom rotate utility

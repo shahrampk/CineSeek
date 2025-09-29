@@ -16,7 +16,6 @@ class CerouselView {
     this.#carousel.innerHTML = "";
   }
   _generateMarkUp() {
-    // return this.#data.map(this._generateMarkupCerousel).join("");
     return this.#data
       .map((movie, i) => {
         if (i < 10)
@@ -24,7 +23,7 @@ class CerouselView {
             <div 
               class="carousel-item flex-shrink-0 w-64 h-96 relative hover:scale-105 transition-all duration-300 cursor-pointer">
                 <div 
-                  class="w-full h-full rounded-xl bg-cover bg-no-repeat bg-center"
+                  class="w-full h-full rounded-xl bg-contain bg-no-repeat bg-center border border-gray-900"
                   style="background-image: url('https://image.tmdb.org/t/p/w500/${
                     movie.poster_path
                   }')">
@@ -71,6 +70,19 @@ class CerouselView {
       if (btn.id === "next") handler("next");
       if (btn.id === "prev") handler("prev");
     });
+  }
+  showOverlay(handler) {
+    const movieCard = this.#carousel.querySelectorAll(".carousel-item");
+    const movieDetailsCard = this.#carousel.querySelector("#movie__details");
+    console.log(movieCard);
+    handler(movieCard);
+  }
+  _showingOverlay(movieCard) {
+    movieCard.forEach((card) =>
+      card.addEventListener("click", () => {
+        movieDetailsCard.classList.remove("hidden");
+      })
+    );
   }
 }
 export default new CerouselView();

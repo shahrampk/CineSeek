@@ -724,20 +724,24 @@ var _ceroucelViewJsDefault = parcelHelpers.interopDefault(_ceroucelViewJs);
 const controllTrendingMovies = async function() {
     try {
         await _modelJs.fetchTrendingMovies();
-        // console.log(model.state.trendingMovies);
+        console.log(_modelJs.state.trendingMovies);
         (0, _ceroucelViewJsDefault.default).render(_modelJs.state.trendingMovies);
     } catch (err) {
         console.error(err);
     }
 };
-const controlMoveSlider = function(direction) {
+const controlMovementSlider = function(direction) {
     (0, _ceroucelViewJsDefault.default).controllmovenent(direction);
+};
+const controlMovieCard = function(movieCard) {
+    (0, _ceroucelViewJsDefault.default)._showingOverlay(movieCard);
 };
 // Initializes the application
 const init = function() {
     (0, _faqsViewJsDefault.default).switchAccordion();
     controllTrendingMovies();
-    (0, _ceroucelViewJsDefault.default).moveSlider(controlMoveSlider);
+    (0, _ceroucelViewJsDefault.default).moveSlider(controlMovementSlider);
+    (0, _ceroucelViewJsDefault.default).showOverlay(controlMovieCard);
 };
 init();
 
@@ -753,6 +757,7 @@ const state = {
 };
 const fetchTrendingMovies = async function() {
     const response = await fetch(`${(0, _configJs.BASE_URL)}/trending/movie/day?api_key=${(0, _configJs.API_KEY)}`);
+    console.log(response);
     const data = await response.json();
     state.trendingMovies = data.results;
 };
@@ -853,13 +858,12 @@ class CerouselView {
         this.#carousel.innerHTML = "";
     }
     _generateMarkUp() {
-        // return this.#data.map(this._generateMarkupCerousel).join("");
         return this.#data.map((movie, i)=>{
             if (i < 10) return `
             <div 
               class="carousel-item flex-shrink-0 w-64 h-96 relative hover:scale-105 transition-all duration-300 cursor-pointer">
                 <div 
-                  class="w-full h-full rounded-xl bg-cover bg-no-repeat bg-center"
+                  class="w-full h-full rounded-xl bg-contain bg-no-repeat bg-center border border-gray-900"
                   style="background-image: url('https://image.tmdb.org/t/p/w500/${movie.poster_path}')">
                   <div class="overlay h-full w-full rounded-xl bg-black/40"></div>
                 </div>
@@ -892,6 +896,17 @@ class CerouselView {
             if (btn.id === "next") handler("next");
             if (btn.id === "prev") handler("prev");
         });
+    }
+    showOverlay(handler) {
+        const movieCard = this.#carousel.querySelectorAll(".carousel-item");
+        const movieDetailsCard1 = this.#carousel.querySelector("#movie__details");
+        console.log(movieCard);
+        handler(movieCard);
+    }
+    _showingOverlay(movieCard) {
+        movieCard.forEach((card)=>card.addEventListener("click", ()=>{
+                movieDetailsCard.classList.remove("hidden");
+            }));
     }
 }
 exports.default = new CerouselView();

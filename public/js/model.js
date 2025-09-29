@@ -9,6 +9,8 @@ export const fetchTrendingMovies = async function () {
   const response = await fetch(
     `${BASE_URL}/trending/movie/day?api_key=${API_KEY}`
   );
+  console.log(response);
+
   const data = await response.json();
   state.trendingMovies = data.results;
 };
