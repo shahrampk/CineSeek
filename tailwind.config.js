@@ -3,20 +3,26 @@ module.exports = {
   content: ["./public/**/*.{html,js}"],
   theme: {
     extend: {
+      fontFamily: {
+        crusive: '"Edu NSW ACT Cursive", "cursive" ,"sans-serif"',
+      },
       screens: {
         "3xl": "1920px",
       },
       height: {
-        slider: "80vh",
         "details-box": "600px",
       },
+      minHeight:{
+        slider: "60vh",
+      },
       width: {
-        "details-box": "50vw",
+        "details-box-lg": "50vw",
+        "details-box-md": "80vw",
       },
       backgroundColor: {
         navbar: "#1a1e21",
         "search-bar": "#343a40",
-        secondary: "",
+        secondary: "#030404",
       },
       backgroundImage: {
         "linear-gradient": "linear-gradient(35deg, #212529 35%, transparent)",

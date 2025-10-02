@@ -3,12 +3,13 @@ import * as model from "./model.js";
 import FAQsView from "./Views/FAQs-view.js";
 import CeroucelView from "./Views/ceroucel-view.js";
 import ceroucelView from "./Views/ceroucel-view.js";
+import movieDetailsView from "./Views/movieDetails-view.js";
 
 const controllTrendingMovies = async function () {
   try {
     await model.fetchTrendingMovies();
-    console.log(model.state.trendingMovies);
-    CeroucelView.render(model.state.trendingMovies);
+
+    ceroucelView.render(model.state.trendingMovies);
   } catch (err) {
     console.error(err);
   }
@@ -16,8 +17,14 @@ const controllTrendingMovies = async function () {
 const controlMovementSlider = function (direction) {
   ceroucelView.controllmovenent(direction);
 };
-const controlMovieCard = function (movieCard) {
-  ceroucelView._showingOverlay(movieCard);
+const showMovieCard = function (cardNum) {
+  model.setCardNum(cardNum);
+  // generating markup
+  movieDetailsView.render(model.state);
+  movieDetailsView.showHide("flex", "hidden");
+};
+const hideMovieCard = function () {
+  movieDetailsView.showHide("hidden", "flex");
 };
 
 // Initializes the application
@@ -25,7 +32,8 @@ const init = function () {
   FAQsView.switchAccordion();
   controllTrendingMovies();
   CeroucelView.moveSlider(controlMovementSlider);
-  CeroucelView.showOverlay(controlMovieCard);
+  ceroucelView.showDetailCard(showMovieCard);
+  movieDetailsView.hideingingDetailsCard(hideMovieCard);
 };
 
 init();

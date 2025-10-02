@@ -1,33 +1,21 @@
-import { API_KEY } from "../config.js";
-import { BASE_URL } from "../config.js";
-class CerouselView {
-  #carousel = document.querySelector("#carousel");
-  #parentEL = document.querySelector("#carousel-box");
-  #nextBtn = document.getElementById("next");
-  #next = document.getElementById("next");
-  #data;
-  render(data) {
-    this.#data = data;
-    const markUp = this._generateMarkUp();
-    this._clear();
-    this.#carousel.insertAdjacentHTML("afterbegin", markUp);
-  }
-  _clear() {
-    this.#carousel.innerHTML = "";
-  }
+import View from "./View.js";
+class CerouselView extends View {
+  _parentEL = document.querySelector("#carousel");
+  _carousel = document.querySelector("#carousel-box");
+
   _generateMarkUp() {
-    return this.#data
+    return this._data
       .map((movie, i) => {
         if (i < 10)
           return `
-            <div 
+            <div data-num= '${i}'
               class="carousel-item flex-shrink-0 w-64 h-96 relative hover:scale-105 transition-all duration-300 cursor-pointer">
                 <div 
                   class="w-full h-full rounded-xl bg-contain bg-no-repeat bg-center border border-gray-900"
                   style="background-image: url('https://image.tmdb.org/t/p/w500/${
                     movie.poster_path
                   }')">
-                  <div class="overlay h-full w-full rounded-xl bg-black/40"></div>
+                  <div class="overlay h-full w-full rounded-xl bg-black/20"></div>
                 </div>
                  <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-5">${
                    i + 1
@@ -39,9 +27,9 @@ class CerouselView {
   }
 
   controllmovenent(direction) {
-    const movieCard = this.#carousel.querySelector(".carousel-item");
+    const movieCard = this._parentEL.querySelector(".carousel-item");
     if (direction === "next") {
-      // console.log("➡ Next button clicked!");
+      //"➡ Next button clicked!"
       carousel.scrollBy({
         left: movieCard.offsetWidth + 32,
         behavior: "smooth",
@@ -49,7 +37,7 @@ class CerouselView {
     }
 
     if (direction === "prev") {
-      // console.log("⬅ Prev button clicked!");
+      // "⬅ Prev button clicked!"
       carousel.scrollBy({
         left: -movieCard.offsetWidth - 32,
         behavior: "smooth",
@@ -57,32 +45,22 @@ class CerouselView {
     }
   }
   moveSlider(handler) {
-    console.log(this.#parentEL);
-
-    this.#parentEL.addEventListener("click", (e) => {
-      console.log(this.#parentEL);
-
+    this._carousel.addEventListener("click", (e) => {
       const btn = e.target.closest(".carousel-btn");
       if (!btn) return;
-      console.log(btn);
-
       // Check button type
       if (btn.id === "next") handler("next");
       if (btn.id === "prev") handler("prev");
     });
   }
-  showOverlay(handler) {
-    const movieCard = this.#carousel.querySelectorAll(".carousel-item");
-    const movieDetailsCard = this.#carousel.querySelector("#movie__details");
-    console.log(movieCard);
-    handler(movieCard);
-  }
-  _showingOverlay(movieCard) {
-    movieCard.forEach((card) =>
-      card.addEventListener("click", () => {
-        movieDetailsCard.classList.remove("hidden");
-      })
-    );
+  showDetailCard(handler) {
+    this._carousel.addEventListener("click", (e) => {
+      const target = e.target.closest(".carousel-item");
+
+      if (!target) return;
+
+      handler(target.dataset.num);
+    });
   }
 }
 export default new CerouselView();

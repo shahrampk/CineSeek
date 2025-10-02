@@ -721,10 +721,11 @@ var _faqsViewJs = require("./Views/FAQs-view.js");
 var _faqsViewJsDefault = parcelHelpers.interopDefault(_faqsViewJs);
 var _ceroucelViewJs = require("./Views/ceroucel-view.js");
 var _ceroucelViewJsDefault = parcelHelpers.interopDefault(_ceroucelViewJs);
+var _movieDetailsViewJs = require("./Views/movieDetails-view.js");
+var _movieDetailsViewJsDefault = parcelHelpers.interopDefault(_movieDetailsViewJs);
 const controllTrendingMovies = async function() {
     try {
         await _modelJs.fetchTrendingMovies();
-        console.log(_modelJs.state.trendingMovies);
         (0, _ceroucelViewJsDefault.default).render(_modelJs.state.trendingMovies);
     } catch (err) {
         console.error(err);
@@ -733,42 +734,138 @@ const controllTrendingMovies = async function() {
 const controlMovementSlider = function(direction) {
     (0, _ceroucelViewJsDefault.default).controllmovenent(direction);
 };
-const controlMovieCard = function(movieCard) {
-    (0, _ceroucelViewJsDefault.default)._showingOverlay(movieCard);
+const showMovieCard = function(cardNum) {
+    _modelJs.setCardNum(cardNum);
+    // generating markup
+    (0, _movieDetailsViewJsDefault.default).render(_modelJs.state);
+    (0, _movieDetailsViewJsDefault.default).showHide("flex", "hidden");
+};
+const hideMovieCard = function() {
+    (0, _movieDetailsViewJsDefault.default).showHide("hidden", "flex");
 };
 // Initializes the application
 const init = function() {
     (0, _faqsViewJsDefault.default).switchAccordion();
     controllTrendingMovies();
     (0, _ceroucelViewJsDefault.default).moveSlider(controlMovementSlider);
-    (0, _ceroucelViewJsDefault.default).showOverlay(controlMovieCard);
+    (0, _ceroucelViewJsDefault.default).showDetailCard(showMovieCard);
+    (0, _movieDetailsViewJsDefault.default).hideingingDetailsCard(hideMovieCard);
 };
 init();
 
-},{"./model.js":"bIjUQ","./Views/FAQs-view.js":"i9ehB","./Views/ceroucel-view.js":"8GKhs","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"bIjUQ":[function(require,module,exports,__globalThis) {
+},{"./model.js":"bIjUQ","./Views/FAQs-view.js":"i9ehB","./Views/ceroucel-view.js":"8GKhs","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g","./Views/movieDetails-view.js":"yAjZN"}],"bIjUQ":[function(require,module,exports,__globalThis) {
 // Model.js file
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "fetchTrendingMovies", ()=>fetchTrendingMovies);
+parcelHelpers.export(exports, "setCardNum", ()=>setCardNum);
 var _configJs = require("./config.js");
 const state = {
-    trendingMovies: []
+    trendingMovies: [],
+    cardNum: 0
 };
 const fetchTrendingMovies = async function() {
-    const response = await fetch(`${(0, _configJs.BASE_URL)}/trending/movie/day?api_key=${(0, _configJs.API_KEY)}`);
-    console.log(response);
-    const data = await response.json();
-    state.trendingMovies = data.results;
+    try {
+        const response = await fetch(`${(0, _configJs.BASE_URL)}/trending/movie/day?api_key=${(0, _configJs.API_KEY)}`);
+        const data = await response.json();
+        state.trendingMovies = data.results;
+        console.log(data);
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
 };
+function setCardNum(cardNum) {
+    state.cardNum = cardNum;
+}
 
 },{"./config.js":"gqtdh","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"gqtdh":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_KEY", ()=>API_KEY);
 parcelHelpers.export(exports, "BASE_URL", ()=>BASE_URL);
+parcelHelpers.export(exports, "genres", ()=>genres);
 const API_KEY = "758ed08ce772f83bbfe9767130078a41";
 const BASE_URL = "https://api.themoviedb.org/3";
+const genres = [
+    {
+        id: 28,
+        name: "Action"
+    },
+    {
+        id: 12,
+        name: "Adventure"
+    },
+    {
+        id: 16,
+        name: "Animation"
+    },
+    {
+        id: 35,
+        name: "Comedy"
+    },
+    {
+        id: 80,
+        name: "Crime"
+    },
+    {
+        id: 99,
+        name: "Documentary"
+    },
+    {
+        id: 18,
+        name: "Drama"
+    },
+    {
+        id: 10751,
+        name: "Family"
+    },
+    {
+        id: 14,
+        name: "Fantasy"
+    },
+    {
+        id: 36,
+        name: "History"
+    },
+    {
+        id: 27,
+        name: "Horror"
+    },
+    {
+        id: 10402,
+        name: "Music"
+    },
+    {
+        id: 9648,
+        name: "Mystery"
+    },
+    {
+        id: 10749,
+        name: "Romance"
+    },
+    {
+        id: 878,
+        name: "Science Fiction"
+    },
+    {
+        id: 10770,
+        name: "TV Movie"
+    },
+    {
+        id: 53,
+        name: "Thriller"
+    },
+    {
+        id: 10752,
+        name: "War"
+    },
+    {
+        id: 37,
+        name: "Western"
+    }
+];
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"7Ti0g":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
@@ -841,31 +938,20 @@ exports.default = new ViewFAQs();
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"8GKhs":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _configJs = require("../config.js");
-class CerouselView {
-    #carousel = document.querySelector("#carousel");
-    #parentEL = document.querySelector("#carousel-box");
-    #nextBtn = document.getElementById("next");
-    #next = document.getElementById("next");
-    #data;
-    render(data) {
-        this.#data = data;
-        const markUp = this._generateMarkUp();
-        this._clear();
-        this.#carousel.insertAdjacentHTML("afterbegin", markUp);
-    }
-    _clear() {
-        this.#carousel.innerHTML = "";
-    }
+var _viewJs = require("./View.js");
+var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+class CerouselView extends (0, _viewJsDefault.default) {
+    _parentEL = document.querySelector("#carousel");
+    _carousel = document.querySelector("#carousel-box");
     _generateMarkUp() {
-        return this.#data.map((movie, i)=>{
+        return this._data.map((movie, i)=>{
             if (i < 10) return `
-            <div 
+            <div data-num= '${i}'
               class="carousel-item flex-shrink-0 w-64 h-96 relative hover:scale-105 transition-all duration-300 cursor-pointer">
                 <div 
                   class="w-full h-full rounded-xl bg-contain bg-no-repeat bg-center border border-gray-900"
                   style="background-image: url('https://image.tmdb.org/t/p/w500/${movie.poster_path}')">
-                  <div class="overlay h-full w-full rounded-xl bg-black/40"></div>
+                  <div class="overlay h-full w-full rounded-xl bg-black/20"></div>
                 </div>
                  <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-5">${i + 1}</p>
             </div>
@@ -873,44 +959,126 @@ class CerouselView {
         }).join("");
     }
     controllmovenent(direction) {
-        const movieCard = this.#carousel.querySelector(".carousel-item");
-        if (direction === "next") // console.log("➡ Next button clicked!");
+        const movieCard = this._parentEL.querySelector(".carousel-item");
+        if (direction === "next") //"➡ Next button clicked!"
         carousel.scrollBy({
             left: movieCard.offsetWidth + 32,
             behavior: "smooth"
         });
-        if (direction === "prev") // console.log("⬅ Prev button clicked!");
+        if (direction === "prev") // "⬅ Prev button clicked!"
         carousel.scrollBy({
             left: -movieCard.offsetWidth - 32,
             behavior: "smooth"
         });
     }
     moveSlider(handler) {
-        console.log(this.#parentEL);
-        this.#parentEL.addEventListener("click", (e)=>{
-            console.log(this.#parentEL);
+        this._carousel.addEventListener("click", (e)=>{
             const btn = e.target.closest(".carousel-btn");
             if (!btn) return;
-            console.log(btn);
             // Check button type
             if (btn.id === "next") handler("next");
             if (btn.id === "prev") handler("prev");
         });
     }
-    showOverlay(handler) {
-        const movieCard = this.#carousel.querySelectorAll(".carousel-item");
-        const movieDetailsCard1 = this.#carousel.querySelector("#movie__details");
-        console.log(movieCard);
-        handler(movieCard);
-    }
-    _showingOverlay(movieCard) {
-        movieCard.forEach((card)=>card.addEventListener("click", ()=>{
-                movieDetailsCard.classList.remove("hidden");
-            }));
+    showDetailCard(handler) {
+        this._carousel.addEventListener("click", (e)=>{
+            const target = e.target.closest(".carousel-item");
+            if (!target) return;
+            handler(target.dataset.num);
+        });
     }
 }
 exports.default = new CerouselView();
 
-},{"../config.js":"gqtdh","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}]},["ltsjM","bJjK8"], "bJjK8", "parcelRequire5b96", {})
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g","./View.js":"fUDc3"}],"fUDc3":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class View {
+    _data;
+    render(data) {
+        if (data) this._data = data;
+        const markUp = this._generateMarkUp();
+        this._clear();
+        this._parentEL.insertAdjacentHTML("afterbegin", markUp);
+    }
+    _clear() {
+        this._parentEL.innerHTML = "";
+    }
+    showHide(add, remove) {
+        this._parentEL.classList.add(add);
+        this._parentEL.classList.remove(remove);
+    }
+}
+exports.default = View;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"yAjZN":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./View.js");
+var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+var _configJs = require("../config.js");
+class ShowMovieDetails extends (0, _viewJsDefault.default) {
+    _parentEL = document.querySelector("#movie__details");
+    hideingingDetailsCard(handler) {
+        this._parentEL.addEventListener("click", (e)=>{
+            const crossBtn = e.target.closest("#cross-btn");
+            if (crossBtn || e.target === e.currentTarget) handler();
+        });
+    }
+    _generateMarkUp() {
+        console.log(this._data);
+        const details = this._data.trendingMovies[this._data.cardNum];
+        console.log(details);
+        return `
+     
+        <div id="movie__details_details--box"
+            class="h-details-box w-details-box-md lg:w-details-box-lg bg-secondary rounded-lg overflow-hidden border border-gray-800/60 flex flex-col ">
+            <div class="image-box bg-green-700 h-3/5 bg-cover bg-center bg-linear-gradient overflow-hidden relative"
+                style="background-image:  url('https://image.tmdb.org/t/p/w500/${details.backdrop_path}')">
+                <div id='cross-btn' class="absolute bg-black/20 cursor-pointer transition-all duration-200 hover:bg-black/30 p-1 rounded-md right-4 top-3 z-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </div>
+                <div class="overlay bg-movie-card-gradient absolute inset-0"></div>
+                <div class="overlay w-full absolute shadow-movie-card-gradient bottom-0  z-40"></div>
+                <div class="title absolute w-full bottom-2 left-4 z-50">
+                    <h2 class="text-xl md:text-3xl font-bold">${details.title}</h2>
+                </div>
+            </div>
+            <div class="details h-2/5 py-2 px-6 flex flex-col gap-5">
+                <div class="movie-info">
+                    <span
+                        class="px-2 py-1 bg-search-bar/70 inline-flex rounded-sm opacity-90 text-sm justify-center items-center">${details.release_date.split("-")[0]}</span>
+
+                        ${this._generateGenric(details)}
+                </div>
+                <div class="description">
+                    <p class="line-clamp-3 opacity-85 text-sm md:text-base">${details.overview}
+                </div>
+                <div class="watch mt-2">
+                    <a href="" type="button"
+                        class="bg-red-600 hover:bg-red-700 transition-all duration-300 px-3 py-2 inline-flex justify-center items-center text-lg rounded group">
+                        <span>Watch</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" height="20" class="transition-all duration-300 group-hover:ml-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    `;
+    }
+    _generateGenric(details) {
+        return details.genre_ids.map((id)=>(0, _configJs.genres).find((g)=>g.id === id)).map((act)=>`
+              <span
+                class="px-2 py-1 bg-search-bar/70 inline-flex rounded-sm opacity-90 text-sm justify-center items-center">${act.name}</span>`).join(" ");
+    }
+}
+exports.default = new ShowMovieDetails();
+
+},{"./View.js":"fUDc3","../config.js":"gqtdh","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}]},["ltsjM","bJjK8"], "bJjK8", "parcelRequire5b96", {})
 
 //# sourceMappingURL=public.5efbdda8.js.map
