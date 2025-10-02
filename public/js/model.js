@@ -6,7 +6,7 @@ export const state = {
   cardNum: 0,
   exploreMovie: {
     data: [],
-    page: 1,
+    page: 8,
   },
 };
 // Trending Movies...

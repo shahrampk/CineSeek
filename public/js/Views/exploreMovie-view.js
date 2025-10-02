@@ -13,10 +13,10 @@ class ExploreMoiveView extends View {
                         <div class="relative flex flex-col gap-2">
                             <img src="https://image.tmdb.org/t/p/w500/${
                               movieData.backdrop_path
-                            }" class="w-full h-56 object-cover">
+                            }" class="w-full h-56 object-cover bg-left-top">
                             <div class="overlay top-0 left-0 h-full w-full bg-black/20 absolute"></div>
                              <!-- Top (title + release + rating) -->
-                            <div class="px-4 pb-0">
+                            <div class="px-4 pb-0 relative z-50">
                                 <h3 class="text-xl font-semibold text-white line-clamp-1">
                                     ${movieData.title}
                                 </h3>
@@ -59,7 +59,7 @@ class ExploreMoiveView extends View {
                                     Trailer
                                 </button>
                                 <button
-                                    class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-medium rounded-lg transition">
+                                    class="flex-1 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-medium rounded-lg transition">
                                     Watchlist
                                 </button>
                             </div>

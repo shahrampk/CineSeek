@@ -717,13 +717,13 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 // Controller.js
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _modelJs = require("./model.js");
-var _faqsViewJs = require("./Views/FAQs-view.js");
-var _faqsViewJsDefault = parcelHelpers.interopDefault(_faqsViewJs);
 var _ceroucelViewJs = require("./Views/ceroucel-view.js");
 var _ceroucelViewJsDefault = parcelHelpers.interopDefault(_ceroucelViewJs);
 var _movieDetailsViewJs = require("./Views/movieDetails-view.js");
 var _movieDetailsViewJsDefault = parcelHelpers.interopDefault(_movieDetailsViewJs);
-const controllTrendingMovies = async function() {
+var _exploreMovieViewJs = require("./Views/exploreMovie-view.js");
+var _exploreMovieViewJsDefault = parcelHelpers.interopDefault(_exploreMovieViewJs);
+const controlTrendingMovies = async function() {
     try {
         await _modelJs.fetchTrendingMovies();
         (0, _ceroucelViewJsDefault.default).render(_modelJs.state.trendingMovies);
@@ -734,48 +734,75 @@ const controllTrendingMovies = async function() {
 const controlMovementSlider = function(direction) {
     (0, _ceroucelViewJsDefault.default).controllmovenent(direction);
 };
+const exploreMoviesController = async function() {
+    try {
+        await _modelJs.fetchMoviesData();
+        (0, _exploreMovieViewJsDefault.default).render(_modelJs.state.exploreMovie.data);
+        console.log(_modelJs.state.exploreMovie.data);
+    } catch (err) {
+        console.error(err);
+    }
+};
 const showMovieCard = function(cardNum) {
     _modelJs.setCardNum(cardNum);
     // generating markup
-    (0, _movieDetailsViewJsDefault.default).render(_modelJs.state);
     (0, _movieDetailsViewJsDefault.default).showHide("flex", "hidden");
+    (0, _movieDetailsViewJsDefault.default).render(_modelJs.state);
 };
 const hideMovieCard = function() {
     (0, _movieDetailsViewJsDefault.default).showHide("hidden", "flex");
 };
 // Initializes the application
 const init = function() {
-    (0, _faqsViewJsDefault.default).switchAccordion();
-    controllTrendingMovies();
+    // FAQsView.switchAccordion();
+    controlTrendingMovies();
+    exploreMoviesController();
     (0, _ceroucelViewJsDefault.default).moveSlider(controlMovementSlider);
     (0, _ceroucelViewJsDefault.default).showDetailCard(showMovieCard);
     (0, _movieDetailsViewJsDefault.default).hideingingDetailsCard(hideMovieCard);
 };
 init();
 
-},{"./model.js":"bIjUQ","./Views/FAQs-view.js":"i9ehB","./Views/ceroucel-view.js":"8GKhs","./Views/movieDetails-view.js":"yAjZN","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"bIjUQ":[function(require,module,exports,__globalThis) {
+},{"./model.js":"bIjUQ","./Views/ceroucel-view.js":"8GKhs","./Views/movieDetails-view.js":"yAjZN","./Views/exploreMovie-view.js":"gVBr0","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"bIjUQ":[function(require,module,exports,__globalThis) {
 // Model.js file
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "fetchTrendingMovies", ()=>fetchTrendingMovies);
+parcelHelpers.export(exports, "fetchMoviesData", ()=>fetchMoviesData);
 parcelHelpers.export(exports, "setCardNum", ()=>setCardNum);
 var _configJs = require("./config.js");
 const state = {
     trendingMovies: [],
-    cardNum: 0
+    cardNum: 0,
+    exploreMovie: {
+        data: [],
+        page: 8
+    }
 };
 const fetchTrendingMovies = async function() {
     try {
-        const response = await fetch(`${(0, _configJs.BASE_URL)}/trending/movie/day?api_key=${(0, _configJs.API_KEY)}`);
+        const response = await fetch(`${(0, _configJs.BASE_URL)}trending/movie/day?api_key=${(0, _configJs.API_KEY)}`);
+        if (!response.ok) throw new Error(`${response.status} - ${response.statusText}`);
         const data = await response.json();
         state.trendingMovies = data.results;
-        console.log(data);
     } catch (err) {
         console.error(err);
         throw err;
     }
 };
+const fetchMoviesData = async function() {
+    try {
+        const response = await fetch(`${(0, _configJs.BASE_URL)}discover/movie?api_key=${(0, _configJs.API_KEY)}&language=en-US&sort_by=popularity.desc&page=${state.exploreMovie.page}`);
+        if (!response.ok) throw new Error(`${response.status} - ${response.statusText}`);
+        const data = await response.json();
+        state.exploreMovie.data = data.results;
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+};
+fetchMoviesData();
 function setCardNum(cardNum) {
     state.cardNum = cardNum;
 }
@@ -787,7 +814,7 @@ parcelHelpers.export(exports, "API_KEY", ()=>API_KEY);
 parcelHelpers.export(exports, "BASE_URL", ()=>BASE_URL);
 parcelHelpers.export(exports, "genres", ()=>genres);
 const API_KEY = "758ed08ce772f83bbfe9767130078a41";
-const BASE_URL = "https://api.themoviedb.org/3";
+const BASE_URL = "https://api.themoviedb.org/3/";
 const genres = [
     {
         id: 28,
@@ -897,45 +924,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"i9ehB":[function(require,module,exports,__globalThis) {
-// FAQs-view.js
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-console.log("FAQs-view.js loaded");
-/**
- * View class for managing FAQ accordion functionality
- */ class ViewFAQs {
-    #parentEl = document.querySelector(".FSQ-box");
-    switchAccordion() {
-        if (!this.#parentEl) return;
-        this.#parentEl.addEventListener("click", (e)=>{
-            const target = e.target.closest(".FSQs");
-            if (!target) return;
-            const ansEl = target.parentNode.querySelector(".FAQs-ans");
-            const icon = target.querySelector("div");
-            if (!ansEl) return;
-            const isAlreadyOpen = !ansEl.classList.contains("hidden");
-            // Close all before opening a new one
-            this._hideOtherOpenedEl(icon);
-            // Toggle current one (only open if it was not already open)
-            if (!isAlreadyOpen) {
-                ansEl.classList.remove("hidden");
-                icon.classList.add("rotate-40");
-            }
-        });
-    }
-    // Hides all open FAQ answers
-    _hideOtherOpenedEl(icon) {
-        if (!this.#parentEl) return;
-        const ansArr = this.#parentEl.querySelectorAll(".FAQs-ans");
-        ansArr.forEach((ans)=>ans.classList.add("hidden"));
-        icon.classList.remove("rotate-40");
-    }
-    rotateIcon() {}
-}
-exports.default = new ViewFAQs();
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"8GKhs":[function(require,module,exports,__globalThis) {
+},{}],"8GKhs":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./View.js");
@@ -984,6 +973,7 @@ class CerouselView extends (0, _viewJsDefault.default) {
         this._carousel.addEventListener("click", (e)=>{
             const target = e.target.closest(".carousel-item");
             if (!target) return;
+            document.body.classList.add('overflow-hidden');
             handler(target.dataset.num);
         });
     }
@@ -1022,13 +1012,14 @@ class ShowMovieDetails extends (0, _viewJsDefault.default) {
     hideingingDetailsCard(handler) {
         this._parentEL.addEventListener("click", (e)=>{
             const crossBtn = e.target.closest("#cross-btn");
-            if (crossBtn || e.target === e.currentTarget) handler();
+            if (crossBtn || e.target === e.currentTarget) {
+                document.body.classList.remove("overflow-hidden");
+                handler();
+            }
         });
     }
     _generateMarkUp() {
-        console.log(this._data);
         const details = this._data.trendingMovies[this._data.cardNum];
-        console.log(details);
         return `
      
         <div id="movie__details_details--box"
@@ -1079,6 +1070,77 @@ class ShowMovieDetails extends (0, _viewJsDefault.default) {
 }
 exports.default = new ShowMovieDetails();
 
-},{"./View.js":"fUDc3","../config.js":"gqtdh","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}]},["ltsjM","bJjK8"], "bJjK8", "parcelRequire5b96", {})
+},{"./View.js":"fUDc3","../config.js":"gqtdh","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"gVBr0":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./View.js");
+var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+class ExploreMoiveView extends (0, _viewJsDefault.default) {
+    _parentEL = document.querySelector("#explore_movies_section");
+    _generateMarkUp() {
+        console.log(this._data);
+        return this._data.map((movieData)=>`
+                     <div
+                        class="movie-card relative  border border-neutral-800 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col justify-between">
+
+                        <!-- Poster -->
+                        <div class="relative flex flex-col gap-2">
+                            <img src="https://image.tmdb.org/t/p/w500/${movieData.backdrop_path}" class="w-full h-56 object-cover">
+                            <div class="overlay top-0 left-0 h-full w-full bg-black/20 absolute"></div>
+                             <!-- Top (title + release + rating) -->
+                            <div class="px-4 pb-0 relative z-50">
+                                <h3 class="text-xl font-semibold text-white line-clamp-1">
+                                    ${movieData.title}
+                                </h3>
+                                <p class="text-xs text-gray-400 flex items-center gap-3 mt-1">
+                                    <span>${movieData.release_date.split("-")[0]}</span>
+                                    <span class="flex items-center text-yellow-500">
+                                        <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 
+                                1.902 0l1.286 3.97a1 1 0 
+                                00.95.69h4.15c.969 0 1.371 
+                                1.24.588 1.81l-3.357 2.44a1 
+                                1 0 00-.364 1.118l1.287 3.97c.3.921-.755 
+                                1.688-1.539 1.118l-3.357-2.44a1 
+                                1 0 00-1.175 0l-3.357 
+                                2.44c-.784.57-1.838-.197-1.539-1.118l1.287-3.97a1 
+                                1 0 00-.364-1.118L2.314 8.397c-.783-.57-.38-1.81.588-1.81h4.15a1 
+                                1 0 00.95-.69l1.286-3.97z" />
+                                        </svg>
+                                        ${movieData.vote_average.toFixed(1)}/10
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div class="p-4 pt-0 flex flex-col justify-between">
+                            <!-- Middle (overview) -->
+                            <div class="">
+                                <p class="text-sm text-gray-400 mt-3 line-clamp-2">
+                                    ${movieData.overview || ""}
+                                </p>
+                            </div>
+                        
+                            <!-- Bottom (buttons) -->
+                            <div class="mt-4 flex gap-3">
+                                <button
+                                    class="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 rounded-lg transition">
+                                    Trailer
+                                </button>
+                                <button
+                                    class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-medium rounded-lg transition">
+                                    Watchlist
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+   `).join("");
+    }
+}
+exports.default = new ExploreMoiveView();
+
+},{"./View.js":"fUDc3","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}]},["ltsjM","bJjK8"], "bJjK8", "parcelRequire5b96", {})
 
 //# sourceMappingURL=public.5efbdda8.js.map

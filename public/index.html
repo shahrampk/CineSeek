@@ -22,26 +22,28 @@
     class="bg-black text-white font-sans 3xl:max-w-screen-3xl 3xl:mx-auto flex flex-col gap-12 relative overflow-x-hidden">
     <!-- Navbar -->
     <header class="bg-navbar/80 p-4 w-full flex justify-between items-center">
-        <svg width="180" height="60" viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
-            <!-- Background Circle -->
-            <circle cx="30" cy="30" r="30" fill="#1A1A1A" />
-            <!-- Magnifying Glass -->
-            <circle cx="30" cy="30" r="18" fill="none" stroke="#FFFFFF" stroke-width="2" />
-            <line x1="42" y1="42" x2="48" y2="48" stroke="#FFFFFF" stroke-width="2" />
-            <!-- Film Reel -->
-            <circle cx="30" cy="30" r="12" fill="#FFFFFF" />
-            <circle cx="30" cy="30" r="9" fill="#1A1A1A" />
-            <!-- Play Button -->
-            <polygon points="27,25 33,30 27,35" fill="#E50914" />
-            <!-- Text -->
-            <text x="55" y="40" text-anchor="start" font-family="Montserrat, Arial, sans-serif" font-size="20"
-                font-weight="bold">
-                <tspan fill="#E50914">CINE</tspan>
-                <tspan fill="#FFFFFF">SEEK</tspan>
-            </text>
-        </svg>
+        <div class="logo">
+            <svg width="180" height="60" viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background Circle -->
+                <circle cx="30" cy="30" r="30" fill="#1A1A1A" />
+                <!-- Magnifying Glass -->
+                <circle cx="30" cy="30" r="18" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="42" y1="42" x2="48" y2="48" stroke="#FFFFFF" stroke-width="2" />
+                <!-- Film Reel -->
+                <circle cx="30" cy="30" r="12" fill="#FFFFFF" />
+                <circle cx="30" cy="30" r="9" fill="#1A1A1A" />
+                <!-- Play Button -->
+                <polygon points="27,25 33,30 27,35" fill="#E50914" />
+                <!-- Text -->
+                <text x="55" y="40" text-anchor="start" font-family="Montserrat, Arial, sans-serif" font-size="20"
+                    font-weight="bold">
+                    <tspan fill="#E50914">CINE</tspan>
+                    <tspan fill="#FFFFFF">SEEK</tspan>
+                </text>
+            </svg>
+        </div>
         <div>
-            <form class="flex items-center gap-2">
+            <form class="items-center gap-2 hidden sm:flex">
                 <input type="text" placeholder="Search movies..."
                     class="px-4 py-2.5 rounded-md bg-search-bar text-white focus:outline-none drop-shadow-md focus-within:drop-shadow-xl transition-all duration-300 outline-none">
 
@@ -49,10 +51,18 @@
                     class="bg-red-600 hover:bg-red-700 px-4 py-2.5 rounded-md drop-shadow-lg transition-all duration-300 cursor-pointer"
                     value="Search">
             </form>
+            <div class="search-icon sm:hidden rounded-full bg-search-bar p-3 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+
+            </div>
         </div>
     </header>
     <!-- Main Content -->
-    <main class="flex gap-24 flex-col p-4 md:p-8">
+    <main class="flex gap-8 md:gap-24 flex-col p-4 md:p-8">
         <!-- Trending Movies Section -->
         <section id="trending__movies">
             <h2 class="text-lg sm:text-2xl font-bold mb-4 md:mb-6">Trending Movies</h2>
@@ -65,7 +75,7 @@
                 </button>
 
                 <!-- Slider Wrapper -->
-                <div id="carousel" class="flex overflow-x-scroll scroll-smooth scrollbar-hide no-scrollbar gap-8 p-7">
+                <div id="carousel" class="flex overflow-x-scroll scroll-smooth scrollbar-hide no-scrollbar gap-8 p-3 md:p-7">
                     <!-- Poster Card -->
                     <div
                         class="carousel-item flex-shrink-0 w-64 h-96 bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer opacity-0">
@@ -176,7 +186,8 @@
                 <div class="heading-box">
                     <h1 class="text-lg sm:text-3xl font-bold mb-4 md:mb-6">Explore Movies</h1>
                 </div>
-                <div id="explore_movies_section" class="grid grid-cols-4 gap-x-4 gap-y-7">
+                <div id="explore_movies_section"
+                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-x-4 gap-y-7">
                     <div
                         class="movie-card relative bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300">
 
@@ -266,7 +277,7 @@
                                     </span>
                                 </p>
                             </div>
-                            
+
                             <!-- Buttons -->
                             <div class="mt-4 flex gap-3">
                                 <button
@@ -281,6 +292,28 @@
                         </div>
                     </div>
 
+                </div>
+                <div class="pagination grid grid-cols-7 justify-between px-3 py-7">
+                    <div
+                        class="left-btn flex bg-search-bar px-3 py-2 md:px-5 md:py-4 rounded-md md:rounded-lg col-span-3 md:col-span-2 items-center gap-3 sm:text-lg cursor-pointer hover:bg-search-bar/80 transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+                        </svg>
+
+                        Back
+                    </div>
+                    <div
+                        class="right-btn flex bg-search-bar px-3 py-2 md:px-5 md:py-4 rounded-md md:rounded-lg col-span-3 md:col-span-2 -col-start-4 md:-col-start-3 justify-end items-center gap-3 sm:text-lg cursor-pointer hover:bg-search-bar/80 transition-colors duration-300">
+                        Next
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                        </svg>
+
+                    </div>
                 </div>
             </div>
         </section>

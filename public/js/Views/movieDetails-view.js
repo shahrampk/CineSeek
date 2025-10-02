@@ -46,7 +46,7 @@ class ShowMovieDetails extends View {
                         ${this._generateGenric(details)}
                 </div>
                 <div class="description">
-                    <p class="line-clamp-3 opacity-85 text-sm md:text-base">${
+                    <p class=" line-clamp-2 md:line-clamp-3 opacity-85 text-sm md:text-base">${
                       details.overview
                     }
                 </div>
