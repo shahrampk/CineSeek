@@ -12,7 +12,7 @@ module.exports = {
       height: {
         "details-box": "600px",
       },
-      minHeight:{
+      minHeight: {
         slider: "60vh",
       },
       width: {
@@ -30,7 +30,7 @@ module.exports = {
           "linear-gradient(25deg, #030404 22%, rgba(0,0,0,0.52),transparent)",
       },
       boxShadow: {
-        "movie-card-gradient": "0px 0px 40px 15px rgb(0,0,0)",
+        "card-gradient": "5px 5px 26px -6px #fa5252",
       },
       rotate: {
         40: "40deg", // 👈 custom rotate utility

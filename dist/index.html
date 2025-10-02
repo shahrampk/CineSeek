@@ -11,7 +11,7 @@
     <!-- favicon -->
     <link rel="shortcut icon" href="/logo.d6cf8192.svg" type="image/x-icon">
     <!-- Js file -->
-    <script type="module" defer="" src="/public.5efbdda8.js"></script>
+    <!-- <script type="module" defer src="../public/js/controller.js"></script> -->
 </head>
 
 <body class="bg-black text-white font-sans 3xl:max-w-screen-3xl 3xl:mx-auto flex flex-col gap-12 relative">
@@ -56,76 +56,82 @@
 
                 <!-- Slider Wrapper -->
                 <div id="carousel" class="flex overflow-x-scroll scroll-smooth scrollbar-hide no-scrollbar gap-8 p-7">
-
                     <!-- Poster Card -->
-                    
-                    <div class="carousel-item flex-shrink-0 w-64 h-96  overflow-y-hidden bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer opacity-0">
+                    <div class="carousel-item flex-shrink-0 w-64 h-96 bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w300/k5s01F32qot8beKgxRjdL9DDZ2m.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
-                        </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">1</p>
-                    </div>
-                    
-                    <!-- More Posters -->
-                    <!-- 
-                    <div
-                        class="carousel-item flex-shrink-0 w-64 h-96  overflow-y-hidden drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
-                        <div class="w-full h-full rounded-xl bg-cover bg-no-repeat bg-center" style="background-image: url('https://image.tmdb.org/t/p/w300/k5s01F32qot8beKgxRjdL9DDZ2m.jpg')">
                             <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">1</p>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            1</p>
+                    </div>
+
+                    <!-- More Posters -->
+
+                    <div class="carousel-item flex-shrink-0 w-64 h-96  drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="w-full h-full rounded-xl bg-cover bg-no-repeat bg-center" style="background-image: url(&quot;https://image.tmdb.org/t/p/w300/k5s01F32qot8beKgxRjdL9DDZ2m.jpg&quot;)">
+                            <div class="overlay h-full w-full bg-black/50"></div>
+                        </div>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            2</p>
                     </div>
                     <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//cm8TNGBGG0aBfWj0LgrESHv8tir.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">3</p>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            3</p>
                     </div>
                     <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//gEU2QniE6E77NI6lCU6MxlNBvIx.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">4</p>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            4</p>
                     </div>
-                    
+
                     <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//cm8TNGBGG0aBfWj0LgrESHv8tir.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">5</p>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            5</p>
                     </div>
                     <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//gEU2QniE6E77NI6lCU6MxlNBvIx.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">6</p>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            6</p>
                     </div>
                     <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//qJ2tW6WMUDux911r6m7haRef0WH.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">7</p>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            7</p>
                     </div>
                     <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//cm8TNGBGG0aBfWj0LgrESHv8tir.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">8</p>
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            8</p>
                     </div>
                     <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//gEU2QniE6E77NI6lCU6MxlNBvIx.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">9</p>
-                    </div> -->
+                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            9</p>
+                    </div>
                 </div>
 
                 <!-- Right Button -->
@@ -134,6 +140,54 @@
                 </button>
             </div>
 
+        </section>
+        <section id="movies">
+            <div class="grid grid-cols-4">
+                <div class="movie-card relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden group shadow-xl hover:shadow-red-600/50 -translate-y-2 transition-all duration-700 ease-out">
+
+                    <!-- Poster Section -->
+                    <div class="relative overflow-hidden rounded-xl">
+                        <img src="https://i.ytimg.com/vi/Q9mJkOR7eCc/hq720.jpg" class="w-full  object-cover bg-center">
+                    </div>
+
+                    <!-- Content Section -->
+                    <div class="p-5">
+                        <h3 class="text-2xl font-bold text-white tracking-tight">
+                            Soudagar
+                        </h3>
+                        <p class="text-sm text-gray-300 flex items-center space-x-3 mt-2">
+                            <span class="font-medium">2022</span>
+                            <span class="text-yellow-400 flex items-center">
+                                <svg class="h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.97a1 1 0 00.95.69h4.15c.969 0 1.371 1.24.588 1.81l-3.357 2.44a1 1 0 00-.364 1.118l1.287 3.97c.3.921-.755 1.688-1.539 1.118l-3.357-2.44a1 1 0 00-1.175 0l-3.357 2.44c-.784.57-1.838-.197-1.539-1.118l1.287-3.97a1 1 0 00-.364-1.118L2.314 8.397c-.783-.57-.38-1.81.588-1.81h4.15a1 1 0 00.95-.69l1.286-3.97z"></path>
+                                </svg>
+                                4.8/10
+                            </span>
+                        </p>
+                        <p class="text-sm text-gray-400 mt-3 line-clamp-2 leading-relaxed">
+                            An epic journey of friendship and rivalry, set against a backdrop of breathtaking landscapes
+                            and intense
+                            drama.
+                        </p>
+
+                        <!-- Buttons -->
+                        <div class="mt-5 flex space-x-4">
+                            <button class="flex-1 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-semibold py-2.5 px-3 rounded-lg shadow-lg hover:shadow-red-500/50 transform hover:-translate-y-1 transition-all duration-300 ease-out">
+                                <svg class="inline-block" height="30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-6.586-3.793A1 1 0 007 8.293v7.414a1 1 0 001.166.918l6.586-3.793a1 1 0 000-1.836z"></path>
+                                </svg>
+                                Trailer
+                            </button>
+                            <button class="px-5 py-2.5 bg-gray-700/80 hover:bg-gray-600/90 text-white font-medium rounded-lg shadow-lg hover:shadow-gray-500/50 transform hover:-translate-y-1 transition-all duration-300 ease-out">
+                                <svg class="w-5 h-5 inline-block mr-2 -mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                                Watchlist
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- Movie Details -->
         <section id="movie__details" class="bg-black/20 backdrop-blur-sm z-50 absolute inset-0 justify-center items-center hidden">
@@ -151,4 +205,4 @@
 
 
 
-</body></html>
+<script src="/public.0ba7c674.js"></script></body></html>

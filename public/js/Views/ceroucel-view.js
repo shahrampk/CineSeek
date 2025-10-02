@@ -58,7 +58,7 @@ class CerouselView extends View {
       const target = e.target.closest(".carousel-item");
 
       if (!target) return;
-
+      document.body.classList.add('overflow-hidden')
       handler(target.dataset.num);
     });
   }

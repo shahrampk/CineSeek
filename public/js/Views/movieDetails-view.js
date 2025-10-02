@@ -6,7 +6,10 @@ class ShowMovieDetails extends View {
   hideingingDetailsCard(handler) {
     this._parentEL.addEventListener("click", (e) => {
       const crossBtn = e.target.closest("#cross-btn");
-      if (crossBtn || e.target === e.currentTarget) handler();
+      if (crossBtn || e.target === e.currentTarget) {
+        document.body.classList.remove("overflow-hidden");
+        handler();
+      }
     });
   }
   _generateMarkUp() {
@@ -30,7 +33,9 @@ class ShowMovieDetails extends View {
                 <div class="overlay bg-movie-card-gradient absolute inset-0"></div>
                 <div class="overlay w-full absolute shadow-movie-card-gradient bottom-0  z-40"></div>
                 <div class="title absolute w-full bottom-2 left-4 z-50">
-                    <h2 class="text-xl md:text-3xl font-bold">${details.title}</h2>
+                    <h2 class="text-xl md:text-3xl font-bold">${
+                      details.title
+                    }</h2>
                 </div>
             </div>
             <div class="details h-2/5 py-2 px-6 flex flex-col gap-5">
@@ -43,7 +48,9 @@ class ShowMovieDetails extends View {
                         ${this._generateGenric(details)}
                 </div>
                 <div class="description">
-                    <p class="line-clamp-3 opacity-85 text-sm md:text-base">${details.overview}
+                    <p class="line-clamp-3 opacity-85 text-sm md:text-base">${
+                      details.overview
+                    }
                 </div>
                 <div class="watch mt-2">
                     <a href="" type="button"

@@ -753,7 +753,7 @@ const init = function() {
 };
 init();
 
-},{"./model.js":"bIjUQ","./Views/FAQs-view.js":"i9ehB","./Views/ceroucel-view.js":"8GKhs","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g","./Views/movieDetails-view.js":"yAjZN"}],"bIjUQ":[function(require,module,exports,__globalThis) {
+},{"./model.js":"bIjUQ","./Views/FAQs-view.js":"i9ehB","./Views/ceroucel-view.js":"8GKhs","./Views/movieDetails-view.js":"yAjZN","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"bIjUQ":[function(require,module,exports,__globalThis) {
 // Model.js file
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -990,7 +990,7 @@ class CerouselView extends (0, _viewJsDefault.default) {
 }
 exports.default = new CerouselView();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g","./View.js":"fUDc3"}],"fUDc3":[function(require,module,exports,__globalThis) {
+},{"./View.js":"fUDc3","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"fUDc3":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class View {

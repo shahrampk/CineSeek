@@ -18,7 +18,7 @@
     <script type="module" defer src="../public/js/controller.js"></script>
 </head>
 
-<body class="bg-black text-white font-sans 3xl:max-w-screen-3xl 3xl:mx-auto flex flex-col gap-12 relative">
+<body class="bg-black text-white font-sans 3xl:max-w-screen-3xl 3xl:mx-auto flex flex-col gap-12 relative overflow-x-hidden">
     <!-- Navbar -->
     <header class="bg-navbar/80 p-4 w-full flex justify-between items-center">
         <svg width="180" height="60" viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
@@ -65,76 +65,101 @@
 
                 <!-- Slider Wrapper -->
                 <div id="carousel" class="flex overflow-x-scroll scroll-smooth scrollbar-hide no-scrollbar gap-8 p-7">
-
                     <!-- Poster Card -->
-                    
-                    <div class="carousel-item flex-shrink-0 w-64 h-96  overflow-y-hidden bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer opacity-0">
+                    <div
+                        class="carousel-item flex-shrink-0 w-64 h-96 bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w300/k5s01F32qot8beKgxRjdL9DDZ2m.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
-                        </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">1</p>
-                    </div>
-                    
-                    <!-- More Posters -->
-                    <!-- 
-                    <div
-                        class="carousel-item flex-shrink-0 w-64 h-96  overflow-y-hidden drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
-                        <div class="w-full h-full rounded-xl bg-cover bg-no-repeat bg-center" style="background-image: url('https://image.tmdb.org/t/p/w300/k5s01F32qot8beKgxRjdL9DDZ2m.jpg')">
                             <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">1</p>
+                        <p
+                            class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            1</p>
                     </div>
-                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+
+                    <!-- More Posters -->
+
+                    <div
+                        class="carousel-item flex-shrink-0 w-64 h-96  drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="w-full h-full rounded-xl bg-cover bg-no-repeat bg-center"
+                            style="background-image: url('https://image.tmdb.org/t/p/w300/k5s01F32qot8beKgxRjdL9DDZ2m.jpg')">
+                            <div class="overlay h-full w-full bg-black/50"></div>
+                        </div>
+                        <p
+                            class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            2</p>
+                    </div>
+                    <div
+                        class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//cm8TNGBGG0aBfWj0LgrESHv8tir.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">3</p>
+                        <p
+                            class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            3</p>
                     </div>
-                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                    <div
+                        class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//gEU2QniE6E77NI6lCU6MxlNBvIx.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">4</p>
+                        <p
+                            class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            4</p>
                     </div>
-                    
-                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+
+                    <div
+                        class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//cm8TNGBGG0aBfWj0LgrESHv8tir.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">5</p>
+                        <p
+                            class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            5</p>
                     </div>
-                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                    <div
+                        class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//gEU2QniE6E77NI6lCU6MxlNBvIx.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">6</p>
+                        <p
+                            class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            6</p>
                     </div>
-                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                    <div
+                        class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//qJ2tW6WMUDux911r6m7haRef0WH.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">7</p>
+                        <p
+                            class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            7</p>
                     </div>
-                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                    <div
+                        class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//cm8TNGBGG0aBfWj0LgrESHv8tir.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">8</p>
+                        <p
+                            class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            8</p>
                     </div>
-                    <div class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
+                    <div
+                        class="carousel-item flex-shrink-0 w-64 h-96  bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer">
                         <div class="w-full h-full rounded-xl bg-[url('https://image.tmdb.org/t/p/w780//gEU2QniE6E77NI6lCU6MxlNBvIx.jpg')] 
                               bg-cover bg-no-repeat bg-center">
-                              <div class="overlay h-full w-full bg-black/50"></div>
+                            <div class="overlay h-full w-full bg-black/50"></div>
                         </div>
-                        <p class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">9</p>
-                    </div> -->
+                        <p
+                            class=" text-black text-8xl absolute bottom-0 text-shadow-outline font-bold -translate-x-1/2 ml-3">
+                            9</p>
+                    </div>
                 </div>
 
                 <!-- Right Button -->
@@ -145,9 +170,218 @@
             </div>
 
         </section>
+        <section id="movies">
+            <div class="heading-box">
+                <h1>Movies</h1>
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+                <div
+                    class="movie-card relative bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300">
+
+                    <!-- Poster -->
+                    <div class="relative">
+                        <img src="https://i.ytimg.com/vi/Q9mJkOR7eCc/hq720.jpg" class="w-full h-56 object-cover">
+                        <div class="overlay top-0 left-0 h-full w-full bg-black/20 absolute"></div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold text-white">
+                            Soudagar
+                        </h3>
+                        <p class="text-xs text-gray-400 flex items-center gap-3 mt-1">
+                            <span>2022</span>
+                            <span class="flex items-center text-yellow-500">
+                                <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 
+                        1.902 0l1.286 3.97a1 1 0 
+                        00.95.69h4.15c.969 0 1.371 
+                        1.24.588 1.81l-3.357 2.44a1 
+                        1 0 00-.364 1.118l1.287 3.97c.3.921-.755 
+                        1.688-1.539 1.118l-3.357-2.44a1 
+                        1 0 00-1.175 0l-3.357 
+                        2.44c-.784.57-1.838-.197-1.539-1.118l1.287-3.97a1 
+                        1 0 00-.364-1.118L2.314 8.397c-.783-.57-.38-1.81.588-1.81h4.15a1 
+                        1 0 00.95-.69l1.286-3.97z" />
+                                </svg>
+                                4.8/10
+                            </span>
+                        </p>
+                        <p class="text-sm text-gray-400 mt-2 line-clamp-2">
+                            An epic journey of friendship and rivalry, set against a backdrop of breathtaking landscapes
+                            and intense
+                            drama.
+                        </p>
+
+                        <!-- Buttons -->
+                        <div class="mt-4 flex gap-3">
+                            <button
+                                class="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 rounded-lg transition">
+                                Trailer
+                            </button>
+                            <button
+                                class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-medium rounded-lg transition">
+                                Watchlist
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ////////////////////////////////////////////// -->
+                <div
+                    class="movie-card relative bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300">
+
+                    <!-- Poster -->
+                    <div class="relative">
+                        <img src="https://i.ytimg.com/vi/Q9mJkOR7eCc/hq720.jpg" class="w-full h-56 object-cover">
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold text-white">
+                            Soudagar
+                        </h3>
+                        <p class="text-xs text-gray-400 flex items-center gap-3 mt-1">
+                            <span>2022</span>
+                            <span class="flex items-center text-yellow-500">
+                                <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 
+                        1.902 0l1.286 3.97a1 1 0 
+                        00.95.69h4.15c.969 0 1.371 
+                        1.24.588 1.81l-3.357 2.44a1 
+                        1 0 00-.364 1.118l1.287 3.97c.3.921-.755 
+                        1.688-1.539 1.118l-3.357-2.44a1 
+                        1 0 00-1.175 0l-3.357 
+                        2.44c-.784.57-1.838-.197-1.539-1.118l1.287-3.97a1 
+                        1 0 00-.364-1.118L2.314 8.397c-.783-.57-.38-1.81.588-1.81h4.15a1 
+                        1 0 00.95-.69l1.286-3.97z" />
+                                </svg>
+                                4.8/10
+                            </span>
+                        </p>
+                        <p class="text-sm text-gray-400 mt-2 line-clamp-2">
+                            An epic journey of friendship and rivalry, set against a backdrop of breathtaking landscapes
+                            and intense
+                            drama.
+                        </p>
+
+                        <!-- Buttons -->
+                        <div class="mt-4 flex gap-3">
+                            <button
+                                class="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 rounded-lg transition">
+                                Trailer
+                            </button>
+                            <button
+                                class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-medium rounded-lg transition">
+                                Watchlist
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="movie-card relative bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300">
+
+                    <!-- Poster -->
+                    <div class="relative">
+                        <img src="https://i.ytimg.com/vi/Q9mJkOR7eCc/hq720.jpg" class="w-full h-56 object-cover">
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold text-white">
+                            Soudagar
+                        </h3>
+                        <p class="text-xs text-gray-400 flex items-center gap-3 mt-1">
+                            <span>2022</span>
+                            <span class="flex items-center text-yellow-500">
+                                <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 
+                        1.902 0l1.286 3.97a1 1 0 
+                        00.95.69h4.15c.969 0 1.371 
+                        1.24.588 1.81l-3.357 2.44a1 
+                        1 0 00-.364 1.118l1.287 3.97c.3.921-.755 
+                        1.688-1.539 1.118l-3.357-2.44a1 
+                        1 0 00-1.175 0l-3.357 
+                        2.44c-.784.57-1.838-.197-1.539-1.118l1.287-3.97a1 
+                        1 0 00-.364-1.118L2.314 8.397c-.783-.57-.38-1.81.588-1.81h4.15a1 
+                        1 0 00.95-.69l1.286-3.97z" />
+                                </svg>
+                                4.8/10
+                            </span>
+                        </p>
+                        <p class="text-sm text-gray-400 mt-2 line-clamp-2">
+                            An epic journey of friendship and rivalry, set against a backdrop of breathtaking landscapes
+                            and intense
+                            drama.
+                        </p>
+
+                        <!-- Buttons -->
+                        <div class="mt-4 flex gap-3">
+                            <button
+                                class="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 rounded-lg transition">
+                                Trailer
+                            </button>
+                            <button
+                                class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-medium rounded-lg transition">
+                                Watchlist
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="movie-card relative bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300">
+
+                    <!-- Poster -->
+                    <div class="relative">
+                        <img src="https://i.ytimg.com/vi/Q9mJkOR7eCc/hq720.jpg" class="w-full h-56 object-cover">
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold text-white">
+                            Soudagar
+                        </h3>
+                        <p class="text-xs text-gray-400 flex items-center gap-3 mt-1">
+                            <span>2022</span>
+                            <span class="flex items-center text-yellow-500">
+                                <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 
+                        1.902 0l1.286 3.97a1 1 0 
+                        00.95.69h4.15c.969 0 1.371 
+                        1.24.588 1.81l-3.357 2.44a1 
+                        1 0 00-.364 1.118l1.287 3.97c.3.921-.755 
+                        1.688-1.539 1.118l-3.357-2.44a1 
+                        1 0 00-1.175 0l-3.357 
+                        2.44c-.784.57-1.838-.197-1.539-1.118l1.287-3.97a1 
+                        1 0 00-.364-1.118L2.314 8.397c-.783-.57-.38-1.81.588-1.81h4.15a1 
+                        1 0 00.95-.69l1.286-3.97z" />
+                                </svg>
+                                4.8/10
+                            </span>
+                        </p>
+                        <p class="text-sm text-gray-400 mt-2 line-clamp-2">
+                            An epic journey of friendship and rivalry, set against a backdrop of breathtaking landscapes
+                            and intense
+                            drama.
+                        </p>
+
+                        <!-- Buttons -->
+                        <div class="mt-4 flex gap-3">
+                            <button
+                                class="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 rounded-lg transition">
+                                Trailer
+                            </button>
+                            <button
+                                class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-medium rounded-lg transition">
+                                Watchlist
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Movie Details -->
         <section id="movie__details"
-            class="bg-black/20 backdrop-blur-sm z-50 absolute inset-0 justify-center items-center hidden">
+            class="bg-black/20 backdrop-blur-sm z-50 fixed top-0 left-0 h-screen w-screen justify-center items-center hidden">
             <!-- <div id="movie__details_details--box"
                 class="h-details-box w-details-box bg-secondary rounded-lg overflow-hidden border border-gray-800/60 flex flex-col">
                 <div class="image-box bg-green-700 h-3/5 bg-cover bg-top bg-linear-gradient"
