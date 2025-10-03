@@ -6,7 +6,8 @@ export const state = {
   cardNum: 0,
   exploreMovie: {
     data: [],
-    page: 8,
+    page: 1,
+    totalPages: 500,
   },
 };
 // Trending Movies...
@@ -33,13 +34,16 @@ export const fetchMoviesData = async function () {
     if (!response.ok)
       throw new Error(`${response.status} - ${response.statusText}`);
     const data = await response.json();
+
     state.exploreMovie.data = data.results;
   } catch (err) {
     console.error(err);
     throw err;
   }
 };
-fetchMoviesData();
 export function setCardNum(cardNum) {
   state.cardNum = cardNum;
 }
+export const moveToPage = function (goToPage) {
+  state.exploreMovie.page = goToPage;
+};

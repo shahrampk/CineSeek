@@ -723,6 +723,8 @@ var _movieDetailsViewJs = require("./Views/movieDetails-view.js");
 var _movieDetailsViewJsDefault = parcelHelpers.interopDefault(_movieDetailsViewJs);
 var _exploreMovieViewJs = require("./Views/exploreMovie-view.js");
 var _exploreMovieViewJsDefault = parcelHelpers.interopDefault(_exploreMovieViewJs);
+var _paginationViewJs = require("./Views/pagination-view.js");
+var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
 const controlTrendingMovies = async function() {
     try {
         await _modelJs.fetchTrendingMovies();
@@ -738,7 +740,7 @@ const exploreMoviesController = async function() {
     try {
         await _modelJs.fetchMoviesData();
         (0, _exploreMovieViewJsDefault.default).render(_modelJs.state.exploreMovie.data);
-        console.log(_modelJs.state.exploreMovie.data);
+        (0, _paginationViewJsDefault.default).render(_modelJs.state.exploreMovie);
     } catch (err) {
         console.error(err);
     }
@@ -752,6 +754,11 @@ const showMovieCard = function(cardNum) {
 const hideMovieCard = function() {
     (0, _movieDetailsViewJsDefault.default).showHide("hidden", "flex");
 };
+// Pagination
+const controlPaginations = async function(goToPage) {
+    _modelJs.moveToPage(goToPage);
+    await exploreMoviesController();
+};
 // Initializes the application
 const init = function() {
     // FAQsView.switchAccordion();
@@ -760,10 +767,11 @@ const init = function() {
     (0, _ceroucelViewJsDefault.default).moveSlider(controlMovementSlider);
     (0, _ceroucelViewJsDefault.default).showDetailCard(showMovieCard);
     (0, _movieDetailsViewJsDefault.default).hideingingDetailsCard(hideMovieCard);
+    (0, _paginationViewJsDefault.default).addHandlerBtn(controlPaginations);
 };
 init();
 
-},{"./model.js":"bIjUQ","./Views/ceroucel-view.js":"8GKhs","./Views/movieDetails-view.js":"yAjZN","./Views/exploreMovie-view.js":"gVBr0","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"bIjUQ":[function(require,module,exports,__globalThis) {
+},{"./model.js":"bIjUQ","./Views/ceroucel-view.js":"8GKhs","./Views/movieDetails-view.js":"yAjZN","./Views/exploreMovie-view.js":"gVBr0","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g","./Views/pagination-view.js":"7Ryct"}],"bIjUQ":[function(require,module,exports,__globalThis) {
 // Model.js file
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -771,13 +779,15 @@ parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "fetchTrendingMovies", ()=>fetchTrendingMovies);
 parcelHelpers.export(exports, "fetchMoviesData", ()=>fetchMoviesData);
 parcelHelpers.export(exports, "setCardNum", ()=>setCardNum);
+parcelHelpers.export(exports, "moveToPage", ()=>moveToPage);
 var _configJs = require("./config.js");
 const state = {
     trendingMovies: [],
     cardNum: 0,
     exploreMovie: {
         data: [],
-        page: 8
+        page: 1,
+        totalPages: 500
     }
 };
 const fetchTrendingMovies = async function() {
@@ -802,10 +812,12 @@ const fetchMoviesData = async function() {
         throw err;
     }
 };
-fetchMoviesData();
 function setCardNum(cardNum) {
     state.cardNum = cardNum;
 }
+const moveToPage = function(goToPage) {
+    state.exploreMovie.page = goToPage;
+};
 
 },{"./config.js":"gqtdh","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"gqtdh":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -1046,7 +1058,7 @@ class ShowMovieDetails extends (0, _viewJsDefault.default) {
                         ${this._generateGenric(details)}
                 </div>
                 <div class="description">
-                    <p class="line-clamp-3 opacity-85 text-sm md:text-base">${details.overview}
+                    <p class=" line-clamp-2 md:line-clamp-3 opacity-85 text-sm md:text-base">${details.overview}
                 </div>
                 <div class="watch mt-2">
                     <a href="" type="button"
@@ -1078,14 +1090,13 @@ var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
 class ExploreMoiveView extends (0, _viewJsDefault.default) {
     _parentEL = document.querySelector("#explore_movies_section");
     _generateMarkUp() {
-        console.log(this._data);
         return this._data.map((movieData)=>`
                      <div
                         class="movie-card relative  border border-neutral-800 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col justify-between">
 
                         <!-- Poster -->
                         <div class="relative flex flex-col gap-2">
-                            <img src="https://image.tmdb.org/t/p/w500/${movieData.backdrop_path}" class="w-full h-56 object-cover">
+                            <img src="https://image.tmdb.org/t/p/w500/${movieData.backdrop_path}" class="w-full h-56 object-cover bg-left-top">
                             <div class="overlay top-0 left-0 h-full w-full bg-black/20 absolute"></div>
                              <!-- Top (title + release + rating) -->
                             <div class="px-4 pb-0 relative z-50">
@@ -1129,7 +1140,7 @@ class ExploreMoiveView extends (0, _viewJsDefault.default) {
                                     Trailer
                                 </button>
                                 <button
-                                    class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-medium rounded-lg transition">
+                                    class="flex-1 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-medium rounded-lg transition">
                                     Watchlist
                                 </button>
                             </div>
@@ -1140,6 +1151,79 @@ class ExploreMoiveView extends (0, _viewJsDefault.default) {
     }
 }
 exports.default = new ExploreMoiveView();
+
+},{"./View.js":"fUDc3","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"7Ryct":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./View.js");
+var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+class PaginationView extends (0, _viewJsDefault.default) {
+    _parentEL = document.querySelector(".pagination");
+    addHandlerBtn(handler) {
+        this._parentEL.addEventListener("click", function(e) {
+            const btn = e.target.closest(".pagination-btn");
+            if (!btn) return;
+            const goToPage = +btn.dataset.goto;
+            console.log(goToPage);
+            handler(goToPage);
+        });
+    }
+    _generateMarkUp() {
+        console.log(this._data);
+        const curPage = this._data.page;
+        const numPages = this._data.totalPages;
+        //   if we are on page 1 and other pages...
+        if (curPage === 1 && numPages > 1) return `
+        <button data-goto='${curPage + 1}'
+          class="pagination-btn right-btn flex bg-search-bar px-3 py-2 md:px-5 md:py-4 rounded-md md:rounded-lg col-span-3 md:col-span-2 -col-start-4 md:-col-start-3 justify-end items-center gap-3 sm:text-lg cursor-pointer hover:bg-search-bar/80 transition-colors duration-300">
+            Next 
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+             stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+          </svg>
+        </button>
+
+      `;
+        //   if we are on last page...
+        if (curPage === numPages && numPages > 1) return `
+
+         <button data-goto='${curPage - 1}'
+          class="pagination-btn left-btn flex bg-search-bar px-3 py-2 md:px-5 md:py-4 rounded-md md:rounded-lg col-span-3 md:col-span-2 items-center gap-3 sm:text-lg cursor-pointer hover:bg-search-bar/80 transition-colors duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+             <path stroke-linecap="round" stroke-linejoin="round"
+               d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+          </svg>
+           Previous
+        </button>
+      `;
+        //   if we are on other pages...
+        if (curPage < numPages) return `
+         <button data-goto='${curPage - 1}'
+             class="pagination-btn left-btn flex bg-search-bar px-3 py-2 md:px-5 md:py-4 rounded-md md:rounded-lg col-span-3 md:col-span-2 items-center gap-3 sm:text-lg cursor-pointer hover:bg-search-bar/80 transition-colors duration-300">
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor" class="size-6">
+                 <path stroke-linecap="round" stroke-linejoin="round"
+                     d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+             </svg>
+              Previous
+        </button>
+        <button data-goto='${curPage + 1}'
+            class="pagination-btn right-btn flex bg-search-bar px-3 py-2 md:px-5 md:py-4 rounded-md md:rounded-lg col-span-3 md:col-span-2 -col-start-4 md:-col-start-3 justify-end items-center gap-3 sm:text-lg cursor-pointer hover:bg-search-bar/80 transition-colors duration-300">
+            Next 
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+            </svg>
+        </button>
+        `;
+        //   if we are on page 1 and no other pages...
+        return ``;
+    }
+}
+exports.default = new PaginationView();
 
 },{"./View.js":"fUDc3","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}]},["ltsjM","bJjK8"], "bJjK8", "parcelRequire5b96", {})
 

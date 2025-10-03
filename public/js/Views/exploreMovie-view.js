@@ -2,7 +2,6 @@ import View from "./View.js";
 class ExploreMoiveView extends View {
   _parentEL = document.querySelector("#explore_movies_section");
   _generateMarkUp() {
-    console.log(this._data);
     return this._data
       .map(
         (movieData) => `

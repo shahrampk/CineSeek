@@ -75,7 +75,8 @@
                 </button>
 
                 <!-- Slider Wrapper -->
-                <div id="carousel" class="flex overflow-x-scroll scroll-smooth scrollbar-hide no-scrollbar gap-8 p-3 md:p-7">
+                <div id="carousel"
+                    class="flex overflow-x-scroll scroll-smooth scrollbar-hide no-scrollbar gap-8 p-3 md:p-7">
                     <!-- Poster Card -->
                     <div
                         class="carousel-item flex-shrink-0 w-64 h-96 bg-black/80 drop-shadow-lg relative hover:scale-105 transition-all duration-300 cursor-pointer opacity-0">
@@ -188,16 +189,15 @@
                 </div>
                 <div id="explore_movies_section"
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-x-4 gap-y-7">
-                    <div
+                    <!-- 
+                     <div
                         class="movie-card relative bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300">
 
-                        <!-- Poster -->
                         <div class="relative">
                             <img src="https://i.ytimg.com/vi/Q9mJkOR7eCc/hq720.jpg" class="w-full h-56 object-cover">
                             <div class="overlay top-0 left-0 h-full w-full bg-black/20 absolute"></div>
                         </div>
 
-                        <!-- Content -->
                         <div class="p-4">
                             <h3 class="text-xl font-semibold text-white">
                                 Soudagar
@@ -226,8 +226,6 @@
                                 and intense
                                 drama.
                             </p>
-
-                            <!-- Buttons -->
                             <div class="mt-4 flex gap-3">
                                 <button
                                     class="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 rounded-lg transition">
@@ -239,12 +237,12 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
-                    <!-- ////////////////////////////////////////////// -->
+                    </div> 
+                    -->
+                    <!-- 
                     <div
                         class="movie-card relative bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300">
 
-                        <!-- Poster -->
                         <div class="relative">
                             <img src="https://image.tmdb.org/t/p/w500/${
                                               movieData.backdrop_path
@@ -252,7 +250,6 @@
                             <div class="overlay top-0 left-0 h-full w-full bg-black/20 absolute"></div>
                         </div>
 
-                        <!-- Content -->
                         <div class="p-4 flex flex-col justify-between bg-cyan-900">
                             <div class="">
                                 <h3 class="text-xl font-semibold text-white line-clamp-1">
@@ -277,8 +274,6 @@
                                     </span>
                                 </p>
                             </div>
-
-                            <!-- Buttons -->
                             <div class="mt-4 flex gap-3">
                                 <button
                                     class="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 rounded-lg transition">
@@ -291,10 +286,11 @@
                             </div>
                         </div>
                     </div>
+                     -->
 
                 </div>
-                <div class="pagination grid grid-cols-7 justify-between px-3 py-7">
-                    <div
+                <div class="pagination grid grid-cols-7 justify-between px-2 py-4 md:px-3 md:py-7">
+                    <!-- <div
                         class="left-btn flex bg-search-bar px-3 py-2 md:px-5 md:py-4 rounded-md md:rounded-lg col-span-3 md:col-span-2 items-center gap-3 sm:text-lg cursor-pointer hover:bg-search-bar/80 transition-colors duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
@@ -302,18 +298,18 @@
                                 d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
                         </svg>
 
-                        Back
+                         Back
                     </div>
                     <div
                         class="right-btn flex bg-search-bar px-3 py-2 md:px-5 md:py-4 rounded-md md:rounded-lg col-span-3 md:col-span-2 -col-start-4 md:-col-start-3 justify-end items-center gap-3 sm:text-lg cursor-pointer hover:bg-search-bar/80 transition-colors duration-300">
-                        Next
+                        Next 
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                         </svg>
 
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
