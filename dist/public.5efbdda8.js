@@ -797,7 +797,7 @@ const init = function() {
 };
 init();
 
-},{"./model.js":"bIjUQ","./Views/ceroucel-view.js":"8GKhs","./Views/movieDetails-view.js":"yAjZN","./Views/exploreMovie-view.js":"gVBr0","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g","./Views/pagination-view.js":"7Ryct","./Views/search-view.js":"6sQz9"}],"bIjUQ":[function(require,module,exports,__globalThis) {
+},{"./model.js":"bIjUQ","./Views/ceroucel-view.js":"8GKhs","./Views/movieDetails-view.js":"yAjZN","./Views/exploreMovie-view.js":"gVBr0","./Views/pagination-view.js":"7Ryct","./Views/search-view.js":"6sQz9","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"bIjUQ":[function(require,module,exports,__globalThis) {
 // Model.js file
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
