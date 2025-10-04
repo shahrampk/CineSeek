@@ -9,6 +9,7 @@ export const state = {
     page: 1,
     totalPages: 500,
   },
+  searchResult: [],
 };
 // Trending Movies...
 export const fetchTrendingMovies = async function () {
@@ -46,4 +47,22 @@ export function setCardNum(cardNum) {
 }
 export const moveToPage = function (goToPage) {
   state.exploreMovie.page = goToPage;
+};
+// MODEL
+export const loadSearchResult = async function (query, page = 1) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}search/movie?api_key=${API_KEY}&query=${query}&page=${page}`
+    );
+
+    if (!response.ok)
+      throw new Error(`${response.status} - ${response.statusText}`);
+
+    const data = await response.json();
+    console.log(data);
+    state.searchResult = data.results;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 };

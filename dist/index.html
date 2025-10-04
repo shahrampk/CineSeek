@@ -36,19 +36,7 @@
                 </text>
             </svg>
         </div>
-        <div>
-            <form class="items-center gap-2 hidden sm:flex">
-                <input type="text" placeholder="Search movies..." class="px-4 py-2.5 rounded-md bg-search-bar text-white focus:outline-none drop-shadow-md focus-within:drop-shadow-xl transition-all duration-300 outline-none">
 
-                <input type="button" class="bg-red-600 hover:bg-red-700 px-4 py-2.5 rounded-md drop-shadow-lg transition-all duration-300 cursor-pointer" value="Search">
-            </form>
-            <div class="search-icon sm:hidden rounded-full bg-search-bar p-3 cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path>
-                </svg>
-
-            </div>
-        </div>
     </header>
     <!-- Main Content -->
     <main class="flex gap-8 md:gap-24 flex-col p-4 md:p-8">
@@ -167,9 +155,22 @@
 
         </section>
         <section id="movies">
-            <div class="flex flex-col gap-3">
-                <div class="heading-box">
-                    <h1 class="text-lg sm:text-3xl font-bold mb-4 md:mb-6">Explore Movies</h1>
+            <div class="flex flex-col gap-7">
+                <div class="heading-box flex justify-between ">
+                    <h1 class="text-lg sm:text-3xl font-bold ">Explore Movies</h1>
+                    <div>
+                        <form id="search" class="items-center gap-2 hidden sm:flex h-fit">
+                            <input type="text" placeholder="Search movies..." id="search__field" class="px-4 py-2.5 rounded-md bg-search-bar text-white focus:outline-none drop-shadow-md focus-within:drop-shadow-xl transition-all duration-300 outline-none">
+
+                            <button type="submit" id="search__btn" class="bg-red-600 hover:bg-red-700 px-4 py-2.5 rounded-md drop-shadow-lg transition-all duration-300 cursor-pointer">Search</button>
+                        </form>
+                        <div class="search-icon sm:hidden rounded-full bg-search-bar p-3 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path>
+                            </svg>
+
+                        </div>
+                    </div>
                 </div>
                 <div id="explore_movies_section" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-x-4 gap-y-7">
                     <!-- 
@@ -272,7 +273,7 @@
                      -->
 
                 </div>
-                <div class="pagination grid grid-cols-7 justify-between px-2 py-4 md:px-3 md:py-7">
+                <div class="pagination grid grid-cols-7 justify-between px-2 py-4 md:px-3 ">
                     <!-- <div
                         class="left-btn flex bg-search-bar px-3 py-2 md:px-5 md:py-4 rounded-md md:rounded-lg col-span-3 md:col-span-2 items-center gap-3 sm:text-lg cursor-pointer hover:bg-search-bar/80 transition-colors duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

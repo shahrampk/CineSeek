@@ -725,6 +725,9 @@ var _exploreMovieViewJs = require("./Views/exploreMovie-view.js");
 var _exploreMovieViewJsDefault = parcelHelpers.interopDefault(_exploreMovieViewJs);
 var _paginationViewJs = require("./Views/pagination-view.js");
 var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
+var _searchViewJs = require("./Views/search-view.js");
+var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
+// Rendering the Trending Movies...
 const controlTrendingMovies = async function() {
     try {
         await _modelJs.fetchTrendingMovies();
@@ -733,9 +736,11 @@ const controlTrendingMovies = async function() {
         console.error(err);
     }
 };
+// Adding the movement functionallity in Slider...
 const controlMovementSlider = function(direction) {
     (0, _ceroucelViewJsDefault.default).controllmovenent(direction);
 };
+// Rendering Explore Movies Cards...
 const exploreMoviesController = async function() {
     try {
         await _modelJs.fetchMoviesData();
@@ -745,21 +750,41 @@ const exploreMoviesController = async function() {
         console.error(err);
     }
 };
+// showing the Movie details Card...
 const showMovieCard = function(cardNum) {
     _modelJs.setCardNum(cardNum);
     // generating markup
     (0, _movieDetailsViewJsDefault.default).showHide("flex", "hidden");
     (0, _movieDetailsViewJsDefault.default).render(_modelJs.state);
 };
+// hiding the Movie details Card...
 const hideMovieCard = function() {
     (0, _movieDetailsViewJsDefault.default).showHide("hidden", "flex");
 };
-// Pagination
+// Pagination...
 const controlPaginations = async function(goToPage) {
     _modelJs.moveToPage(goToPage);
     await exploreMoviesController();
+}; // CONTROLLER
+const controlSearchResult = async function() {
+    try {
+        // 1) Get Search Query
+        const query = (0, _searchViewJsDefault.default).getQuery();
+        if (!query) return;
+        // Show loader
+        (0, _exploreMovieViewJsDefault.default).renderLoader();
+        // Load search results with pagination
+        await _modelJs.loadSearchResult(query);
+        // Render movies
+        (0, _exploreMovieViewJsDefault.default).render(_modelJs.state.searchResult);
+        // Render pagination
+        (0, _paginationViewJsDefault.default).showExploreBtn();
+        (0, _exploreMovieViewJsDefault.default).addHandlerExploreMovies(exploreMoviesController);
+    } catch (err) {
+        console.log(err);
+    }
 };
-// Initializes the application
+// Initializes the application...
 const init = function() {
     // FAQsView.switchAccordion();
     controlTrendingMovies();
@@ -768,10 +793,11 @@ const init = function() {
     (0, _ceroucelViewJsDefault.default).showDetailCard(showMovieCard);
     (0, _movieDetailsViewJsDefault.default).hideingingDetailsCard(hideMovieCard);
     (0, _paginationViewJsDefault.default).addHandlerBtn(controlPaginations);
+    (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResult);
 };
 init();
 
-},{"./model.js":"bIjUQ","./Views/ceroucel-view.js":"8GKhs","./Views/movieDetails-view.js":"yAjZN","./Views/exploreMovie-view.js":"gVBr0","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g","./Views/pagination-view.js":"7Ryct"}],"bIjUQ":[function(require,module,exports,__globalThis) {
+},{"./model.js":"bIjUQ","./Views/ceroucel-view.js":"8GKhs","./Views/movieDetails-view.js":"yAjZN","./Views/exploreMovie-view.js":"gVBr0","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g","./Views/pagination-view.js":"7Ryct","./Views/search-view.js":"6sQz9"}],"bIjUQ":[function(require,module,exports,__globalThis) {
 // Model.js file
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -780,6 +806,7 @@ parcelHelpers.export(exports, "fetchTrendingMovies", ()=>fetchTrendingMovies);
 parcelHelpers.export(exports, "fetchMoviesData", ()=>fetchMoviesData);
 parcelHelpers.export(exports, "setCardNum", ()=>setCardNum);
 parcelHelpers.export(exports, "moveToPage", ()=>moveToPage);
+parcelHelpers.export(exports, "loadSearchResult", ()=>loadSearchResult);
 var _configJs = require("./config.js");
 const state = {
     trendingMovies: [],
@@ -788,7 +815,8 @@ const state = {
         data: [],
         page: 1,
         totalPages: 500
-    }
+    },
+    searchResult: []
 };
 const fetchTrendingMovies = async function() {
     try {
@@ -817,6 +845,18 @@ function setCardNum(cardNum) {
 }
 const moveToPage = function(goToPage) {
     state.exploreMovie.page = goToPage;
+};
+const loadSearchResult = async function(query, page = 1) {
+    try {
+        const response = await fetch(`${(0, _configJs.BASE_URL)}search/movie?api_key=${(0, _configJs.API_KEY)}&query=${query}&page=${page}`);
+        if (!response.ok) throw new Error(`${response.status} - ${response.statusText}`);
+        const data = await response.json();
+        console.log(data);
+        state.searchResult = data.results;
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
 };
 
 },{"./config.js":"gqtdh","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"gqtdh":[function(require,module,exports,__globalThis) {
@@ -1010,6 +1050,20 @@ class View {
         this._parentEL.classList.add(add);
         this._parentEL.classList.remove(remove);
     }
+    renderLoader() {
+        this._parentEL.innerHTML = `
+        <div class="flex justify-center gap-2 col-span-full min-h-screen pt-10">
+          <div class="w-4 h-4 rounded-full bg-red-500 animate-bounce"></div>
+          <div
+            class="w-4 h-4 rounded-full bg-red-500 animate-bounce [animation-delay:-.3s]"
+          ></div>
+          <div
+            class="w-4 h-4 rounded-full bg-red-500 animate-bounce [animation-delay:-.5s]"
+          ></div>
+        </div>
+
+    `;
+    }
 }
 exports.default = View;
 
@@ -1063,7 +1117,7 @@ class ShowMovieDetails extends (0, _viewJsDefault.default) {
                 <div class="watch mt-2">
                     <a href="" type="button"
                         class="bg-red-600 hover:bg-red-700 transition-all duration-300 px-3 py-2 inline-flex justify-center items-center text-lg rounded group">
-                        <span>Watch</span>
+                        <span>Trailer</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" height="20" class="transition-all duration-300 group-hover:ml-2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
@@ -1089,6 +1143,10 @@ var _viewJs = require("./View.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
 class ExploreMoiveView extends (0, _viewJsDefault.default) {
     _parentEL = document.querySelector("#explore_movies_section");
+    addHandlerExploreMovies(handler) {
+        const exploreBtn = document.querySelector("#explore-Btn");
+        exploreBtn.addEventListener("click", handler);
+    }
     _generateMarkUp() {
         return this._data.map((movieData)=>`
                      <div
@@ -1096,7 +1154,7 @@ class ExploreMoiveView extends (0, _viewJsDefault.default) {
 
                         <!-- Poster -->
                         <div class="relative flex flex-col gap-2">
-                            <img src="https://image.tmdb.org/t/p/w500/${movieData.backdrop_path}" class="w-full h-56 object-cover bg-left-top">
+                            <img alt="${movieData.title}" src="https://image.tmdb.org/t/p/w500/${movieData.backdrop_path}" class="w-full h-56 object-cover bg-left-top">
                             <div class="overlay top-0 left-0 h-full w-full bg-black/20 absolute"></div>
                              <!-- Top (title + release + rating) -->
                             <div class="px-4 pb-0 relative z-50">
@@ -1164,12 +1222,10 @@ class PaginationView extends (0, _viewJsDefault.default) {
             const btn = e.target.closest(".pagination-btn");
             if (!btn) return;
             const goToPage = +btn.dataset.goto;
-            console.log(goToPage);
             handler(goToPage);
         });
     }
     _generateMarkUp() {
-        console.log(this._data);
         const curPage = this._data.page;
         const numPages = this._data.totalPages;
         //   if we are on page 1 and other pages...
@@ -1222,8 +1278,49 @@ class PaginationView extends (0, _viewJsDefault.default) {
         //   if we are on page 1 and no other pages...
         return ``;
     }
+    showExploreBtn() {
+        this._parentEL.innerHTML = `
+    <button id="explore-Btn"
+    class="overflow-hidden w-32 p-2 h-12 bg-navbar text-gray-100/80 border-none rounded-md text-xl font-bold cursor-pointer relative z-10 group col-span-full flex justify-self-center border justify-center">
+    Back To
+    <span
+        class="absolute w-36 h-32 -top-8 -left-2 bg-red-200 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-bottom"></span>
+    <span
+        class="absolute w-36 h-32 -top-8 -left-2 bg-red-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-bottom"></span>
+    <span
+        class="absolute w-36 h-32 -top-8 -left-2 bg-red-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-bottom"></span>
+    <span
+        class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2.5 left-6 z-10">Movies</span>
+</button>
+    `;
+    }
 }
 exports.default = new PaginationView();
+
+},{"./View.js":"fUDc3","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"6sQz9":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./View.js");
+var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+class SearchView {
+    _parentEL = document.querySelector("#search");
+    getQuery() {
+        const query = this._parentEL.querySelector("#search__field").value;
+        this.clearInput(query);
+        return query;
+    }
+    clearInput() {
+        this._parentEL.querySelector("#search__field").value = "";
+    }
+    addHandlerSearch(handler) {
+        console.log(this._parentEL);
+        this._parentEL.addEventListener("submit", (e)=>{
+            e.preventDefault();
+            handler();
+        });
+    }
+}
+exports.default = new SearchView();
 
 },{"./View.js":"fUDc3","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}]},["ltsjM","bJjK8"], "bJjK8", "parcelRequire5b96", {})
 

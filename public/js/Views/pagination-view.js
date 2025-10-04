@@ -8,13 +8,10 @@ class PaginationView extends View {
       const btn = e.target.closest(".pagination-btn");
       if (!btn) return;
       const goToPage = +btn.dataset.goto;
-      console.log(goToPage);
       handler(goToPage);
     });
   }
   _generateMarkUp() {
-    console.log(this._data);
-
     const curPage = this._data.page;
     const numPages = this._data.totalPages;
     //   if we are on page 1 and other pages...
@@ -72,6 +69,22 @@ class PaginationView extends View {
     }
     //   if we are on page 1 and no other pages...
     return ``;
+  }
+  showExploreBtn() {
+    this._parentEL.innerHTML = `
+    <button id="explore-Btn"
+    class="overflow-hidden w-32 p-2 h-12 bg-navbar text-gray-100/80 border-none rounded-md text-xl font-bold cursor-pointer relative z-10 group col-span-full flex justify-self-center border justify-center">
+    Back To
+    <span
+        class="absolute w-36 h-32 -top-8 -left-2 bg-red-200 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-bottom"></span>
+    <span
+        class="absolute w-36 h-32 -top-8 -left-2 bg-red-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-bottom"></span>
+    <span
+        class="absolute w-36 h-32 -top-8 -left-2 bg-red-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-bottom"></span>
+    <span
+        class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2.5 left-6 z-10">Movies</span>
+</button>
+    `;
   }
 }
 

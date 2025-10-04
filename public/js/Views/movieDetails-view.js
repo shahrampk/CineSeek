@@ -53,7 +53,7 @@ class ShowMovieDetails extends View {
                 <div class="watch mt-2">
                     <a href="" type="button"
                         class="bg-red-600 hover:bg-red-700 transition-all duration-300 px-3 py-2 inline-flex justify-center items-center text-lg rounded group">
-                        <span>Watch</span>
+                        <span>Trailer</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" height="20" class="transition-all duration-300 group-hover:ml-2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />

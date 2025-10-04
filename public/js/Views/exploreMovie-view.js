@@ -1,6 +1,10 @@
 import View from "./View.js";
 class ExploreMoiveView extends View {
   _parentEL = document.querySelector("#explore_movies_section");
+  addHandlerExploreMovies(handler) {
+    const exploreBtn = document.querySelector("#explore-Btn");
+    exploreBtn.addEventListener("click", handler);
+  }
   _generateMarkUp() {
     return this._data
       .map(
@@ -10,9 +14,11 @@ class ExploreMoiveView extends View {
 
                         <!-- Poster -->
                         <div class="relative flex flex-col gap-2">
-                            <img src="https://image.tmdb.org/t/p/w500/${
-                              movieData.backdrop_path
-                            }" class="w-full h-56 object-cover bg-left-top">
+                            <img alt="${
+                              movieData.title
+                            }" src="https://image.tmdb.org/t/p/w500/${
+          movieData.backdrop_path
+        }" class="w-full h-56 object-cover bg-left-top">
                             <div class="overlay top-0 left-0 h-full w-full bg-black/20 absolute"></div>
                              <!-- Top (title + release + rating) -->
                             <div class="px-4 pb-0 relative z-50">
