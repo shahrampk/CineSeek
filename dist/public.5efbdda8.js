@@ -207,11 +207,11 @@
       });
     }
   }
-})({"ltsjM":[function(require,module,exports,__globalThis) {
+})({"5jGPH":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 1234;
+var HMR_SERVER_PORT = 51183;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
@@ -852,7 +852,7 @@ const loadSearchResult = async function(query, page = 1) {
         if (!response.ok) throw new Error(`${response.status} - ${response.statusText}`);
         const data = await response.json();
         console.log(data);
-        state.searchResult = data.results;
+        state.searchResult = data.results.slice(0, 10);
     } catch (err) {
         console.error(err);
         throw err;
@@ -1199,7 +1199,7 @@ class ExploreMoiveView extends (0, _viewJsDefault.default) {
                                 </button>
                                 <button
                                     class="flex-1 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-medium rounded-lg transition">
-                                    Watchlist
+                                   <span class="text-xl">+</span> Watchlist
                                 </button>
                             </div>
                         </div>
@@ -1322,6 +1322,6 @@ class SearchView {
 }
 exports.default = new SearchView();
 
-},{"./View.js":"fUDc3","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}]},["ltsjM","bJjK8"], "bJjK8", "parcelRequire5b96", {})
+},{"./View.js":"fUDc3","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}]},["5jGPH","bJjK8"], "bJjK8", "parcelRequire5b96", {})
 
 //# sourceMappingURL=public.5efbdda8.js.map

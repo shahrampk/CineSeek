@@ -5,6 +5,7 @@ import movieDetailsView from "./Views/movieDetails-view.js";
 import exploreMovieView from "./Views/exploreMovie-view.js";
 import paginationView from "./Views/pagination-view.js";
 import searchView from "./Views/search-view.js";
+import watchListView from "./Views/watchList-view.js";
 
 // Rendering the Trending Movies...
 const controlTrendingMovies = async function () {
@@ -65,19 +66,33 @@ const controlSearchResult = async function () {
     paginationView.showExploreBtn();
     exploreMovieView.addHandlerExploreMovies(exploreMoviesController);
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
+};
+// WatchList Controller...
+const controlWatchlist = function (cardNum) {
+  model.addToWatchList(cardNum);
+  watchListView.render(model.state.watchList);
+};
+const deleteWatchlistMovieCard = function (cardNum) {
+  console.log(cardNum);
+  model.deleteFromWatch(cardNum);
+  watchListView.render(model.state.watchList);
+  exploreMovieView.render(model.state.exploreMovie.data);
 };
 // Initializes the application...
 const init = function () {
   // FAQsView.switchAccordion();
   controlTrendingMovies();
   exploreMoviesController();
+  exploreMovieView.addHandlerWatchList(controlWatchlist);
   CeroucelView.moveSlider(controlMovementSlider);
   CeroucelView.showDetailCard(showMovieCard);
   movieDetailsView.hideingingDetailsCard(hideMovieCard);
   paginationView.addHandlerBtn(controlPaginations);
   searchView.addHandlerSearch(controlSearchResult);
+  watchListView.loadWatchListMovie(model.state.watchList);
+  watchListView.addHandlerRemoveCard(deleteWatchlistMovieCard);
 };
 
 init();

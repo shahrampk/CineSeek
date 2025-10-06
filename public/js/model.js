@@ -10,6 +10,7 @@ export const state = {
     totalPages: 500,
   },
   searchResult: [],
+  watchList: JSON.parse(localStorage.getItem("watchlist")) || [],
 };
 // Trending Movies...
 export const fetchTrendingMovies = async function () {
@@ -60,9 +61,22 @@ export const loadSearchResult = async function (query, page = 1) {
 
     const data = await response.json();
     console.log(data);
-    state.searchResult = data.results;
+    state.searchResult = data.results.slice(0, 1);
   } catch (err) {
     console.error(err);
     throw err;
   }
+};
+export const addToWatchList = function (cardNum) {
+  const movieDate = state.exploreMovie.data[cardNum];
+  if (!state.watchList.some((m) => m.id === movieDate.id)) {
+    state.watchList.push(movieDate);
+    localStorage.setItem("watchlist", JSON.stringify(state.watchList));
+  }
+};
+export const deleteFromWatch = function (cardNum) {
+  state.watchList.splice(cardNum, 1);
+  console.log(state.watchList);
+  
+  localStorage.setItem("watchlist", JSON.stringify(state.watchList));
 };

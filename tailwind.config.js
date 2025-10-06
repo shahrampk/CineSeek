@@ -35,6 +35,9 @@ module.exports = {
       rotate: {
         40: "40deg", // 👈 custom rotate utility
       },
+      boxShadow: {
+        alert: "0 0 10px rgba(0,0,0,0.5)",
+      },
       textShadow: {
         outline: ` 2px 2px 0 #ced4da,
              -2px -2px 0 #ced4da,
@@ -44,6 +47,29 @@ module.exports = {
              -3px  0   0 #ced4da,
               0   3px  0 #ced4da,
               0  -3px  0 #ced4da`,
+      },
+      animation: {
+        showMsg: "showmsg 4s ease-out",
+      },
+      keyframes: {
+        showmsg: {
+          "0%": {
+            opacity: "0",
+            transform: 'translateX("-10px")',
+          },
+
+          "10%": {
+            opacity: "1",
+            transform: 'translateX("0px")',
+          },
+          "90%": {
+            opacity: "0",
+            transform: 'translateX("10px")',
+          },
+          "100%": {
+            visibility: "hidden",
+          },
+        },
       },
     },
   },
