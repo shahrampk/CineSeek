@@ -23,12 +23,14 @@ const controlMovementSlider = function (direction) {
 // Rendering Explore Movies Cards...
 const exploreMoviesController = async function () {
   try {
+    exploreMovieView.renderLoader();
     await model.fetchMoviesData();
     exploreMovieView.render(model.state.exploreMovie.data);
     paginationView.render(model.state.exploreMovie);
   } catch (err) {
     console.error(err);
-  }
+    exploreMovieView.renderErrorBox();
+  } 
 };
 // showing the Movie details Card...
 const showMovieCard = function (cardNum) {
@@ -43,8 +45,13 @@ const hideMovieCard = function () {
 };
 // Pagination...
 const controlPaginations = async function (goToPage) {
-  model.moveToPage(goToPage);
-  await exploreMoviesController();
+  try {
+    exploreMovieView.renderLoader();
+    model.moveToPage(goToPage);
+    await exploreMoviesController();
+  } catch (err) {
+    exploreMovieView.renderErrorBox(err);
+  }
 }; // CONTROLLER
 const controlSearchResult = async function () {
   try {
