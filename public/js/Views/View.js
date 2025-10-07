@@ -29,7 +29,6 @@ export default class View {
   }
   renderErrorMsg(msg) {
     const alertBox = document.querySelector(".alert-box");
-    console.log(alertBox);
     alertBox.innerHTML = `
      <div
         class="bg-navbar hover:bg-search-bar/90 transition-colors duration-200 backdrop-blur-md cursor-context-menu border-b-4 opacity-0 animate-showMsg border-red-600 w-fit p-6 shadow-alert rounded-md text-xl">

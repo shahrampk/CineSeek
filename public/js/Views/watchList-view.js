@@ -2,7 +2,6 @@ import View from "./View.js";
 class WatchListView extends View {
   _parentEL = document.querySelector("#watchlist");
   _generateMarkUp() {
-    console.log(this._data);
     if (this._data.length <= 0) {
       return `
         <li class="group flex items-center justify-center gap-2 px-5 py-10 
@@ -70,7 +69,6 @@ class WatchListView extends View {
       .join("");
   }
   loadWatchListMovie(data) {
-    console.log(data);
 
     window.addEventListener("load", () => {
       this.render(data);

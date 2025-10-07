@@ -75,14 +75,12 @@ const controlWatchlist = function (cardNum) {
   watchListView.render(model.state.watchList);
 };
 const deleteWatchlistMovieCard = function (cardNum) {
-  console.log(cardNum);
   model.deleteFromWatch(cardNum);
   watchListView.render(model.state.watchList);
   exploreMovieView.render(model.state.exploreMovie.data);
 };
 // Initializes the application...
 const init = function () {
-  // FAQsView.switchAccordion();
   controlTrendingMovies();
   exploreMoviesController();
   exploreMovieView.addHandlerWatchList(controlWatchlist);

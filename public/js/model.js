@@ -60,7 +60,6 @@ export const loadSearchResult = async function (query, page = 1) {
       throw new Error(`${response.status} - ${response.statusText}`);
 
     const data = await response.json();
-    console.log(data);
     state.searchResult = data.results.slice(0, 1);
   } catch (err) {
     console.error(err);
@@ -76,7 +75,6 @@ export const addToWatchList = function (cardNum) {
 };
 export const deleteFromWatch = function (cardNum) {
   state.watchList.splice(cardNum, 1);
-  console.log(state.watchList);
   
   localStorage.setItem("watchlist", JSON.stringify(state.watchList));
 };

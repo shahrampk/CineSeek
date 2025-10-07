@@ -207,11 +207,11 @@
       });
     }
   }
-})({"5jGPH":[function(require,module,exports,__globalThis) {
+})({"ltsjM":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 51183;
+var HMR_SERVER_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
@@ -727,6 +727,8 @@ var _paginationViewJs = require("./Views/pagination-view.js");
 var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
 var _searchViewJs = require("./Views/search-view.js");
 var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
+var _watchListViewJs = require("./Views/watchList-view.js");
+var _watchListViewJsDefault = parcelHelpers.interopDefault(_watchListViewJs);
 // Rendering the Trending Movies...
 const controlTrendingMovies = async function() {
     try {
@@ -781,23 +783,35 @@ const controlSearchResult = async function() {
         (0, _paginationViewJsDefault.default).showExploreBtn();
         (0, _exploreMovieViewJsDefault.default).addHandlerExploreMovies(exploreMoviesController);
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
+};
+// WatchList Controller...
+const controlWatchlist = function(cardNum) {
+    _modelJs.addToWatchList(cardNum);
+    (0, _watchListViewJsDefault.default).render(_modelJs.state.watchList);
+};
+const deleteWatchlistMovieCard = function(cardNum) {
+    _modelJs.deleteFromWatch(cardNum);
+    (0, _watchListViewJsDefault.default).render(_modelJs.state.watchList);
+    (0, _exploreMovieViewJsDefault.default).render(_modelJs.state.exploreMovie.data);
 };
 // Initializes the application...
 const init = function() {
-    // FAQsView.switchAccordion();
     controlTrendingMovies();
     exploreMoviesController();
+    (0, _exploreMovieViewJsDefault.default).addHandlerWatchList(controlWatchlist);
     (0, _ceroucelViewJsDefault.default).moveSlider(controlMovementSlider);
     (0, _ceroucelViewJsDefault.default).showDetailCard(showMovieCard);
     (0, _movieDetailsViewJsDefault.default).hideingingDetailsCard(hideMovieCard);
     (0, _paginationViewJsDefault.default).addHandlerBtn(controlPaginations);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResult);
+    (0, _watchListViewJsDefault.default).loadWatchListMovie(_modelJs.state.watchList);
+    (0, _watchListViewJsDefault.default).addHandlerRemoveCard(deleteWatchlistMovieCard);
 };
 init();
 
-},{"./model.js":"bIjUQ","./Views/ceroucel-view.js":"8GKhs","./Views/movieDetails-view.js":"yAjZN","./Views/exploreMovie-view.js":"gVBr0","./Views/pagination-view.js":"7Ryct","./Views/search-view.js":"6sQz9","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"bIjUQ":[function(require,module,exports,__globalThis) {
+},{"./model.js":"bIjUQ","./Views/ceroucel-view.js":"8GKhs","./Views/movieDetails-view.js":"yAjZN","./Views/exploreMovie-view.js":"gVBr0","./Views/pagination-view.js":"7Ryct","./Views/search-view.js":"6sQz9","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g","./Views/watchList-view.js":"bgkNo"}],"bIjUQ":[function(require,module,exports,__globalThis) {
 // Model.js file
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -807,6 +821,8 @@ parcelHelpers.export(exports, "fetchMoviesData", ()=>fetchMoviesData);
 parcelHelpers.export(exports, "setCardNum", ()=>setCardNum);
 parcelHelpers.export(exports, "moveToPage", ()=>moveToPage);
 parcelHelpers.export(exports, "loadSearchResult", ()=>loadSearchResult);
+parcelHelpers.export(exports, "addToWatchList", ()=>addToWatchList);
+parcelHelpers.export(exports, "deleteFromWatch", ()=>deleteFromWatch);
 var _configJs = require("./config.js");
 const state = {
     trendingMovies: [],
@@ -816,7 +832,8 @@ const state = {
         page: 1,
         totalPages: 500
     },
-    searchResult: []
+    searchResult: [],
+    watchList: JSON.parse(localStorage.getItem("watchlist")) || []
 };
 const fetchTrendingMovies = async function() {
     try {
@@ -851,12 +868,22 @@ const loadSearchResult = async function(query, page = 1) {
         const response = await fetch(`${(0, _configJs.BASE_URL)}search/movie?api_key=${(0, _configJs.API_KEY)}&query=${query}&page=${page}`);
         if (!response.ok) throw new Error(`${response.status} - ${response.statusText}`);
         const data = await response.json();
-        console.log(data);
-        state.searchResult = data.results.slice(0, 10);
+        state.searchResult = data.results.slice(0, 1);
     } catch (err) {
         console.error(err);
         throw err;
     }
+};
+const addToWatchList = function(cardNum) {
+    const movieDate = state.exploreMovie.data[cardNum];
+    if (!state.watchList.some((m)=>m.id === movieDate.id)) {
+        state.watchList.push(movieDate);
+        localStorage.setItem("watchlist", JSON.stringify(state.watchList));
+    }
+};
+const deleteFromWatch = function(cardNum) {
+    state.watchList.splice(cardNum, 1);
+    localStorage.setItem("watchlist", JSON.stringify(state.watchList));
 };
 
 },{"./config.js":"gqtdh","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"gqtdh":[function(require,module,exports,__globalThis) {
@@ -1064,6 +1091,16 @@ class View {
 
     `;
     }
+    renderErrorMsg(msg) {
+        const alertBox = document.querySelector(".alert-box");
+        alertBox.innerHTML = `
+     <div
+        class="bg-navbar hover:bg-search-bar/90 transition-colors duration-200 backdrop-blur-md cursor-context-menu border-b-4 opacity-0 animate-showMsg border-red-600 w-fit p-6 shadow-alert rounded-md text-xl">
+
+            <p class="alert-msg opacity-95">${msg}</p>
+        </div>
+    `;
+    }
 }
 exports.default = View;
 
@@ -1147,65 +1184,78 @@ class ExploreMoiveView extends (0, _viewJsDefault.default) {
         const exploreBtn = document.querySelector("#explore-Btn");
         exploreBtn.addEventListener("click", handler);
     }
+    addHandlerWatchList(handler) {
+        this._parentEL.addEventListener("click", (e)=>{
+            const WatchlistBtn = e.target.closest(".Watchlist");
+            if (!WatchlistBtn) return;
+            if (WatchlistBtn.textContent.trim() === "+ Watchlist") {
+                WatchlistBtn.textContent = "Added";
+                handler(+WatchlistBtn.dataset.num);
+            } else this.renderErrorMsg("This is already Added!");
+        });
+    }
     _generateMarkUp() {
-        return this._data.map((movieData)=>`
-                     <div
-                        class="movie-card relative  border border-neutral-800 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col justify-between">
+        const watchList = JSON.parse(localStorage.getItem("watchlist")) || [];
+        const markup = this._data.map((movieData, i)=>{
+            const isSaved = watchList.some((m)=>m.id === movieData.id);
+            return `
+      <div
+        class="movie-card relative border border-neutral-800 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col justify-between">
+      
+        <!-- Poster -->
+        <div class="relative flex flex-col gap-2">
+          <img alt="${movieData.title}"
+            src="https://image.tmdb.org/t/p/w500/${movieData.backdrop_path}"
+            class="w-full h-56 object-cover bg-left-top">
+          <div class="overlay top-0 left-0 h-full w-full bg-black/20 absolute"></div>
 
-                        <!-- Poster -->
-                        <div class="relative flex flex-col gap-2">
-                            <img alt="${movieData.title}" src="https://image.tmdb.org/t/p/w500/${movieData.backdrop_path}" class="w-full h-56 object-cover bg-left-top">
-                            <div class="overlay top-0 left-0 h-full w-full bg-black/20 absolute"></div>
-                             <!-- Top (title + release + rating) -->
-                            <div class="px-4 pb-0 relative z-50">
-                                <h3 class="text-xl font-semibold text-white line-clamp-1">
-                                    ${movieData.title}
-                                </h3>
-                                <p class="text-xs text-gray-400 flex items-center gap-3 mt-1">
-                                    <span>${movieData.release_date.split("-")[0]}</span>
-                                    <span class="flex items-center text-yellow-500">
-                                        <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 
-                                1.902 0l1.286 3.97a1 1 0 
-                                00.95.69h4.15c.969 0 1.371 
-                                1.24.588 1.81l-3.357 2.44a1 
-                                1 0 00-.364 1.118l1.287 3.97c.3.921-.755 
-                                1.688-1.539 1.118l-3.357-2.44a1 
-                                1 0 00-1.175 0l-3.357 
-                                2.44c-.784.57-1.838-.197-1.539-1.118l1.287-3.97a1 
-                                1 0 00-.364-1.118L2.314 8.397c-.783-.57-.38-1.81.588-1.81h4.15a1 
-                                1 0 00.95-.69l1.286-3.97z" />
-                                        </svg>
-                                        ${movieData.vote_average.toFixed(1)}/10
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <!-- Content -->
-                        <div class="p-4 pt-0 flex flex-col justify-between">
-                            <!-- Middle (overview) -->
-                            <div class="">
-                                <p class="text-sm text-gray-400 mt-3 line-clamp-2">
-                                    ${movieData.overview || ""}
-                                </p>
-                            </div>
-                        
-                            <!-- Bottom (buttons) -->
-                            <div class="mt-4 flex gap-3">
-                                <button
-                                    class="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 rounded-lg transition">
-                                    Trailer
-                                </button>
-                                <button
-                                    class="flex-1 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-medium rounded-lg transition">
-                                   <span class="text-xl">+</span> Watchlist
-                                </button>
-                            </div>
-                        </div>
-                        
-                    </div>
-   `).join("");
+          <!-- Top (title + release + rating) -->
+          <div class="px-4 pb-0 relative z-40">
+            <h3 class="text-xl font-semibold text-white line-clamp-1">${movieData.title}</h3>
+            <p class="text-xs text-gray-400 flex items-center gap-3 mt-1">
+              <span>${movieData.release_date.split("-")[0]}</span>
+              <span class="flex items-center text-yellow-500">
+                <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921
+                        1.902 0l1.286 3.97a1 1 0
+                        00.95.69h4.15c.969 0 1.371
+                        1.24.588 1.81l-3.357 2.44a1
+                        1 0 00-.364 1.118l1.287 3.97c.3.921-.755
+                        1.688-1.539 1.118l-3.357-2.44a1
+                        1 0 00-1.175 0l-3.357
+                        2.44c-.784.57-1.838-.197-1.539-1.118l1.287-3.97a1
+                        1 0 00-.364-1.118L2.314 8.397c-.783-.57-.38-1.81.588-1.81h4.15a1
+                        1 0 00.95-.69l1.286-3.97z" />
+                </svg>
+                ${movieData.vote_average.toFixed(1)}/10
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="p-4 pt-0 flex flex-col justify-between">
+          <p class="text-sm text-gray-400 mt-3 line-clamp-2">${movieData.overview || ""}</p>
+
+          <!-- Bottom (buttons) -->
+          <div class="mt-4 flex gap-3">
+            <button
+              class="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 rounded-lg transition">
+              Trailer
+            </button>
+
+            <button data-num="${i}"
+              class="Watchlist flex-1 px-4 py-2 rounded-lg
+                 bg-neutral-800 hover:bg-neutral-700"
+               text-white text-sm font-medium rounded-lg transition">
+              ${isSaved ? "Added" : '<span class="text-xl">+</span> Watchlist'}
+            </button>
+          </div>
+        </div>
+      </div>
+      `;
+        }).join("");
+        return markup;
     }
 }
 exports.default = new ExploreMoiveView();
@@ -1313,7 +1363,6 @@ class SearchView {
         this._parentEL.querySelector("#search__field").value = "";
     }
     addHandlerSearch(handler) {
-        console.log(this._parentEL);
         this._parentEL.addEventListener("submit", (e)=>{
             e.preventDefault();
             handler();
@@ -1322,6 +1371,83 @@ class SearchView {
 }
 exports.default = new SearchView();
 
-},{"./View.js":"fUDc3","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}]},["5jGPH","bJjK8"], "bJjK8", "parcelRequire5b96", {})
+},{"./View.js":"fUDc3","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}],"bgkNo":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./View.js");
+var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+class WatchListView extends (0, _viewJsDefault.default) {
+    _parentEL = document.querySelector("#watchlist");
+    _generateMarkUp() {
+        if (this._data.length <= 0) return `
+        <li class="group flex items-center justify-center gap-2 px-5 py-10 
+               rounded-md border border-transparent 
+               text-gray-300 md:text-lg font-medium hover:bg-search-bar hover:text-white
+               transition-all duration-300 ease-in-out">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                      stroke="currentColor" class="w-12 h-12 mr-1">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
+                  </svg>
+               <p>No Movie yet. Find a nice movie and add it into Watchlist :)</p>
+        </li>
+      `;
+        return this._data.map((movieDate, i)=>`
+        <li class="group">
+            <div 
+              class="flex items-center justify-between p-4 rounded-xl 
+                    backdrop-blur hover:border-red-500 hover:-translate-y-1 hover:bg-search-bar hover:shadow-lg
+                     transition-all duration-300 ease-in-out cursor-pointer" 
+              title="Watch Trailer">
+          
+              <!-- Left Side -->
+              <div class="flex items-center gap-4">
+                <!-- Movie Image -->
+                <img 
+                  src="${movieDate.backdrop_path ? `https://image.tmdb.org/t/p/w500/${movieDate.backdrop_path}` : "fallback.jpg"}" 
+                  alt="${movieDate.title}" 
+                  class="w-14 h-14 rounded-lg object-cover bg-center shadow-md text-xs"
+                  loading="lazy"
+                >
+          
+                <!-- Movie Title -->
+                <span title="${movieDate.title}" class="text-sm md:text-base font-medium text-gray-300 group-hover:text-white line-clamp-2">
+                  ${movieDate.title}
+                </span>
+              </div>
+          
+              <!-- Remove Button -->
+              <button 
+                id="remove-btn" data-num="${i}"
+                class="p-2 rounded-full opacity-0 group-hover:opacity-100 
+                       hover:bg-red-500/20 transition-all duration-300"
+                title="Remove from Watchlist">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                     class="w-5 h-5 text-red-400 group-hover:scale-110 transition-transform" 
+                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
+</li>
+`).join("");
+    }
+    loadWatchListMovie(data) {
+        window.addEventListener("load", ()=>{
+            this.render(data);
+        });
+    }
+    addHandlerRemoveCard(handler) {
+        this._parentEL.addEventListener("click", (e)=>{
+            const removeBtn = e.target.closest("#remove-btn");
+            if (!removeBtn) return;
+            handler(+removeBtn.dataset.num);
+        });
+    }
+    removeWatchlistMovieCard() {}
+}
+exports.default = new WatchListView();
+
+},{"./View.js":"fUDc3","@parcel/transformer-js/src/esmodule-helpers.js":"7Ti0g"}]},["ltsjM","bJjK8"], "bJjK8", "parcelRequire5b96", {})
 
 //# sourceMappingURL=public.5efbdda8.js.map
