@@ -13,6 +13,8 @@ class ShowMovieDetails extends View {
     });
   }
   _generateMarkUp() {
+    console.log(this._data);
+
     const details = this._data.trendingMovies[this._data.cardNum];
     return `
      
@@ -51,7 +53,9 @@ class ShowMovieDetails extends View {
                     }
                 </div>
                 <div class="watch mt-2">
-                    <a href="" type="button"
+                    <a target="_blank" href="https://www.youtube.com/watch?v=${
+                      details.trailerKey
+                    }"
                         class="bg-red-600 hover:bg-red-700 transition-all duration-300 px-3 py-2 inline-flex justify-center items-center text-lg rounded group">
                         <span>Trailer</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"

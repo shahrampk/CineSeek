@@ -721,6 +721,10 @@ video {
   display: block;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .flex {
   display: flex;
 }
@@ -799,12 +803,12 @@ video {
   max-height: 24rem;
 }
 
-.min-h-screen {
-  min-height: 100vh;
-}
-
 .min-h-96 {
   min-height: 24rem;
+}
+
+.min-h-screen {
+  min-height: 100vh;
 }
 
 .w-12 {
@@ -1164,11 +1168,6 @@ video {
 .bg-secondary {
   --tw-bg-opacity: 1;
   background-color: rgb(3 4 4 / var(--tw-bg-opacity, 1));
-}
-
-.bg-green-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(34 197 94 / var(--tw-bg-opacity, 1));
 }
 
 .bg-linear-gradient {

@@ -11,8 +11,7 @@ import watchListView from "./Views/watchList-view.js";
 const controlTrendingMovies = async function () {
   try {
     await model.fetchTrendingMovies();
-
-    CeroucelView.render(model.state.trendingMovies);
+    CeroucelView.render(model.state.trendingMoviesData.trendingMovies);
   } catch (err) {
     console.error(err);
   }
@@ -36,7 +35,7 @@ const showMovieCard = function (cardNum) {
   model.setCardNum(cardNum);
   // generating markup
   movieDetailsView.showHide("flex", "hidden");
-  movieDetailsView.render(model.state);
+  movieDetailsView.render(model.state.trendingMoviesData);
 };
 // hiding the Movie details Card...
 const hideMovieCard = function () {
@@ -61,7 +60,6 @@ const controlSearchResult = async function () {
 
     // Render movies
     exploreMovieView.render(model.state.searchResult);
-
   } catch (err) {
     console.error(err);
     exploreMovieView.renderErrorBox(err);

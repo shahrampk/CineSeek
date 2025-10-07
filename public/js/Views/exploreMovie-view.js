@@ -18,6 +18,8 @@ class ExploreMoiveView extends View {
     });
   }
   _generateMarkUp() {
+    console.log(this._data);
+    
     const watchList = JSON.parse(localStorage.getItem("watchlist")) || [];
 
     const markup = this._data
@@ -69,10 +71,12 @@ class ExploreMoiveView extends View {
 
           <!-- Bottom (buttons) -->
           <div class="mt-4 flex gap-3">
-            <button
-              class="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 rounded-lg transition">
+            <a target="_blank" href="https://www.youtube.com/watch?v=${
+              movieData.trailerKey
+            }"
+              class="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 rounded-lg transition flex justify-center items-center">
               Trailer
-            </button>
+            </a>
 
             <button data-num="${i}"
               class="Watchlist flex-1 px-4 py-2 rounded-lg

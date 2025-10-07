@@ -1,5 +1,5 @@
 import View from "./View.js";
-class SearchView {
+class SearchView extends View {
   _parentEL = document.querySelector("#search");
   getQuery() {
     const query = this._parentEL.querySelector("#search__field").value;
