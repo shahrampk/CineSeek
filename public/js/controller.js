@@ -62,11 +62,13 @@ const controlSearchResult = async function () {
     // Render movies
     exploreMovieView.render(model.state.searchResult);
 
+  } catch (err) {
+    console.error(err);
+    exploreMovieView.renderErrorBox(err);
+  } finally {
     // Render pagination
     paginationView.showExploreBtn();
     exploreMovieView.addHandlerExploreMovies(exploreMoviesController);
-  } catch (err) {
-    console.error(err);
   }
 };
 // WatchList Controller...

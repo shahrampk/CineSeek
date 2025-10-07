@@ -37,6 +37,7 @@ module.exports = {
       },
       boxShadow: {
         alert: "0 0 10px rgba(0,0,0,0.5)",
+        card: "0 0 0px 2px rgba(73, 80, 87, 0.4)",
       },
       textShadow: {
         outline: ` 2px 2px 0 #ced4da,

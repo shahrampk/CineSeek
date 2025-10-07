@@ -56,11 +56,15 @@ export const loadSearchResult = async function (query, page = 1) {
       `${BASE_URL}search/movie?api_key=${API_KEY}&query=${query}&page=${page}`
     );
 
-    if (!response.ok)
+    if (!response.ok) {
+      console.log(`${response.status} - ${response.statusText}`);
       throw new Error(`${response.status} - ${response.statusText}`);
+    }
 
     const data = await response.json();
-    state.searchResult = data.results.slice(0, 1);
+    if (data.results.length === 0)
+      throw new Error("No movies found for your search. Try another title!");
+    state.searchResult = data.results.slice(0, 4);
   } catch (err) {
     console.error(err);
     throw err;
@@ -75,6 +79,6 @@ export const addToWatchList = function (cardNum) {
 };
 export const deleteFromWatch = function (cardNum) {
   state.watchList.splice(cardNum, 1);
-  
+
   localStorage.setItem("watchlist", JSON.stringify(state.watchList));
 };
