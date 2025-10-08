@@ -2,7 +2,6 @@ import View from "./View.js";
 class WatchListView extends View {
   _parentEL = document.querySelector("#watchlist");
   _generateMarkUp() {
-    console.log(this._data);
 
     if (this._data.length <= 0) {
       return `
@@ -83,9 +82,9 @@ class WatchListView extends View {
     this._parentEL.addEventListener("click", (e) => {
       const removeBtn = e.target.closest("#remove-btn");
       if (!removeBtn) return;
+      e.preventDefault();
       handler(+removeBtn.dataset.num);
     });
   }
-  removeWatchlistMovieCard() {}
 }
 export default new WatchListView();

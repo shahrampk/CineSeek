@@ -13,8 +13,6 @@ class ShowMovieDetails extends View {
     });
   }
   _generateMarkUp() {
-    console.log(this._data);
-
     const details = this._data.trendingMovies[this._data.cardNum];
     return `
      

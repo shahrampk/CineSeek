@@ -18,8 +18,6 @@ class ExploreMoiveView extends View {
     });
   }
   _generateMarkUp() {
-    console.log(this._data);
-    
     const watchList = JSON.parse(localStorage.getItem("watchlist")) || [];
 
     const markup = this._data
@@ -39,9 +37,11 @@ class ExploreMoiveView extends View {
 
           <!-- Top (title + release + rating) -->
           <div class="px-4 pb-0 relative z-40">
-            <h3 class="text-xl font-semibold text-white line-clamp-1">${
+            <h3 title="${
               movieData.title
-            }</h3>
+            }" class="text-xl font-semibold text-white line-clamp-1">${
+          movieData.title
+        }</h3>
             <p class="text-xs text-gray-400 flex items-center gap-3 mt-1">
               <span>${movieData.release_date.split("-")[0]}</span>
               <span class="flex items-center text-yellow-500">

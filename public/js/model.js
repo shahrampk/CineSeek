@@ -67,7 +67,6 @@ export const fetchMoviesData = async function () {
 
     // Step 3: Save final array to state
     state.exploreMovie.data = moviesWithTrailers;
-    console.log(state.exploreMovie.data);
   } catch (err) {
     console.error("Error fetching discover movies:", err);
     throw err;
@@ -128,7 +127,6 @@ export const loadSearchResult = async function (query, page = 1) {
 
     // Step 4: Save final array to state
     state.searchResult = moviesWithTrailers;
-    console.log(state.searchResult);
   } catch (err) {
     console.error("Error loading search results:", err);
     throw err;
