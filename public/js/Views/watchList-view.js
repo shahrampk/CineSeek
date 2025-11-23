@@ -5,7 +5,7 @@ class WatchListView extends View {
 
     if (this._data.length <= 0) {
       return `
-        <li class="group flex items-center justify-center gap-2 px-5 py-10 
+        <li class="flex items-center justify-center gap-2 px-5 py-10 
                rounded-md border border-transparent 
                text-gray-300 md:text-lg font-medium hover:bg-search-bar hover:text-white
                transition-all duration-300 ease-in-out">
